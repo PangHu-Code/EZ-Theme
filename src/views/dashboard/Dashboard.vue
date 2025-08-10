@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="dashboard-container">
     <div class="dashboard-inner">
       <div class="dashboard-card welcome-card" :class="{'card-animate': !loading.userInfo}">
@@ -1566,7 +1566,7 @@ export default {
       try {
         switch (clientType) {
           case 'shadowrocket':
-            url = `shadowrocket://add/sub://${window.btoa(subscribeUrl).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')}?remark=${encodeURIComponent(siteName)}`;
+            url = `shadowrocket://add/sub://${window.btoa(subscribeUrl + '&flags=shadowrocket').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')}?remark=${encodeURIComponent(siteName)}`;
             break;
           case 'surge':
             url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
@@ -1599,28 +1599,28 @@ export default {
             url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
           case 'clash-meta-android':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl + '&flags=meta')}&name=${siteName}`;
             break;
           case 'surfboard':
             url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
           case 'flclash':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flags=meta'}&name=${siteName}`;
             break;
           case 'clashverge':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flags=meta'}&name=${siteName}`;
             break;
           case 'nekobox':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flags=meta'}&name=${siteName}`;
             break;
           case 'nekoray':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flags=meta'}&name=${siteName}`;
             break;
           case 'clashx':
             url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
           case 'clashx-meta':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl + '&flags=meta')}&name=${siteName}`;
             break;
           case 'singbox-ios':
             url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
@@ -1635,16 +1635,16 @@ export default {
             url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
             break;
           case 'hiddify-android':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
+            url = `hiddify://import/${subscribeUrl}&flags=sing#${siteName}`;
             break;
           case 'hiddify-windows':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
+            url = `hiddify://import/${subscribeUrl}&flags=sing#${siteName}`;
             break;
           case 'hiddify-macos':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
+            url = `hiddify://import/${subscribeUrl}&flags=sing#${siteName}`;
             break;
           case 'hiddify-ios':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
+            url = `hiddify://import/${subscribeUrl}&flags=sing#${siteName}`;
             break;
           default:
             navigator.clipboard.writeText(subscribeUrl)
@@ -4317,5 +4317,3 @@ a.eztheme-btn {
   color: var(--theme-color);
 }
 </style>
-
-
