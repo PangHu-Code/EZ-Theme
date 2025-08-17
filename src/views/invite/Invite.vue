@@ -6,7 +6,7 @@
         <div class="modal-overlay" @click="cancelConfirmation"></div>
         <div class="modal-container">
           <div class="modal-header">
-            <h3>{{ $t('invite.confirm.title') }}</h3>
+            <h3>{{ $t("invite.confirm.title") }}</h3>
             <button class="modal-close" @click="cancelConfirmation">
               <IconX />
             </button>
@@ -16,27 +16,27 @@
           </div>
           <div class="modal-footer">
             <button class="btn-outline cancel-btn" @click="cancelConfirmation">
-              {{ $t('invite.confirm.cancel') }}
+              {{ $t("invite.confirm.cancel") }}
             </button>
             <button class="btn-primary confirm-btn" @click="confirmAction">
-              {{ $t('invite.confirm.confirm') }}
+              {{ $t("invite.confirm.confirm") }}
             </button>
           </div>
         </div>
       </div>
     </transition>
-    
+
     <div class="account-inner">
       <!-- 欢迎卡片 -->
       <div class="dashboard-card welcome-card">
         <div class="card-header">
-          <h2 class="card-title">{{ $t('invite.title') }}</h2>
+          <h2 class="card-title">{{ $t("invite.title") }}</h2>
         </div>
         <div class="card-body">
-          <p>{{ $t('invite.description') }}</p>
+          <p>{{ $t("invite.description") }}</p>
         </div>
       </div>
-      
+
       <!-- 返佣统计卡片组 -->
       <div class="stats-grid">
         <template v-if="loading.inviteData">
@@ -48,54 +48,66 @@
             </div>
           </div>
         </template>
-        
+
         <template v-else>
-        <div class="stats-card">
-          <div class="stats-icon">
-            <IconUsers :size="32" />
-          </div>
-          <div class="stats-info">
+          <div class="stats-card">
+            <div class="stats-icon">
+              <IconUsers :size="32" />
+            </div>
+            <div class="stats-info">
               <div class="stats-value">{{ inviteStats.registeredUsers }}</div>
-            <div class="stats-label">{{ $t('invite.stats.registeredUsers') }}</div>
+              <div class="stats-label">
+                {{ $t("invite.stats.registeredUsers") }}
+              </div>
+            </div>
           </div>
-        </div>
-        
-        <div class="stats-card">
-          <div class="stats-icon">
-            <IconCoin :size="32" />
+
+          <div class="stats-card">
+            <div class="stats-icon">
+              <IconCoin :size="32" />
+            </div>
+            <div class="stats-info">
+              <div class="stats-value">
+                {{ currencySymbol }}{{ inviteStats.pendingCommission }}
+              </div>
+              <div class="stats-label">
+                {{ $t("invite.stats.pendingCommission") }}
+              </div>
+            </div>
           </div>
-          <div class="stats-info">
-              <div class="stats-value">{{ currencySymbol }}{{ inviteStats.pendingCommission }}</div>
-            <div class="stats-label">{{ $t('invite.stats.pendingCommission') }}</div>
+
+          <div class="stats-card">
+            <div class="stats-icon">
+              <IconWallet :size="32" />
+            </div>
+            <div class="stats-info">
+              <div class="stats-value">
+                {{ currencySymbol }}{{ inviteStats.validCommission }}
+              </div>
+              <div class="stats-label">
+                {{ $t("invite.stats.availableCommission") }}
+              </div>
+            </div>
           </div>
-        </div>
-        
-        <div class="stats-card">
-          <div class="stats-icon">
-            <IconWallet :size="32" />
-          </div>
-          <div class="stats-info">
-              <div class="stats-value">{{ currencySymbol }}{{ inviteStats.availableCommission }}</div>
-            <div class="stats-label">{{ $t('invite.stats.availableCommission') }}</div>
-          </div>
-        </div>
-        
-        <div class="stats-card">
-          <div class="stats-icon">
-            <IconChartBar :size="32" />
-          </div>
-          <div class="stats-info">
+
+          <div class="stats-card">
+            <div class="stats-icon">
+              <IconChartBar :size="32" />
+            </div>
+            <div class="stats-info">
               <div class="stats-value">{{ inviteStats.commissionRate }}%</div>
-            <div class="stats-label">{{ $t('invite.stats.commissionRate') }}</div>
+              <div class="stats-label">
+                {{ $t("invite.stats.commissionRate") }}
+              </div>
+            </div>
           </div>
-        </div>
         </template>
       </div>
-      
+
       <!-- 返佣规则卡片 -->
       <div class="dashboard-card">
         <div class="card-header">
-          <h2 class="card-title">{{ $t('invite.rules.title') }}</h2>
+          <h2 class="card-title">{{ $t("invite.rules.title") }}</h2>
         </div>
         <div class="card-body">
           <div class="rules-grid">
@@ -104,48 +116,54 @@
                 <IconShare :size="24" />
               </div>
               <div class="rule-content">
-                <h3>{{ $t('invite.rules.share.title') }}</h3>
-                <p>{{ $t('invite.rules.share.desc') }}</p>
+                <h3>{{ $t("invite.rules.share.title") }}</h3>
+                <p>{{ $t("invite.rules.share.desc") }}</p>
               </div>
             </div>
-            
+
             <div class="rule-item">
               <div class="rule-icon">
                 <IconUserPlus :size="24" />
               </div>
               <div class="rule-content">
-                <h3>{{ $t('invite.rules.register.title') }}</h3>
-                <p>{{ $t('invite.rules.register.desc') }}</p>
+                <h3>{{ $t("invite.rules.register.title") }}</h3>
+                <p>{{ $t("invite.rules.register.desc") }}</p>
               </div>
             </div>
-            
+
             <div class="rule-item">
               <div class="rule-icon">
                 <IconShoppingCart :size="24" />
               </div>
               <div class="rule-content">
-                <h3>{{ $t('invite.rules.purchase.title') }}</h3>
-                <p>{{ $t('invite.rules.purchase.desc') }}</p>
+                <h3>{{ $t("invite.rules.purchase.title") }}</h3>
+                <p>{{ $t("invite.rules.purchase.desc") }}</p>
               </div>
             </div>
-            
+
             <div class="rule-item">
               <div class="rule-icon">
                 <IconCash :size="24" />
               </div>
               <div class="rule-content">
-                <h3>{{ $t('invite.rules.commission.title') }}</h3>
-                <p>{{ $t('invite.rules.commission.desc', { rate: inviteStats.commissionRate }) }}</p>
+                <h3>{{ $t("invite.rules.commission.title") }}</h3>
+                <p>
+                  {{
+                    $t("invite.rules.commission.desc", {
+                      rate: inviteStats.commissionRate,
+                    })
+                  }}
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- 佣金余额卡片 -->
       <div class="dashboard-card balance-card">
         <div class="card-header">
-          <h2 class="card-title">{{ $t('invite.balance.title') }}</h2>
+          <h2 class="card-title">{{ $t("invite.balance.title") }}</h2>
         </div>
         <div v-if="loading.inviteData" class="card-body skeleton-loading">
           <div class="skeleton-row"></div>
@@ -154,31 +172,48 @@
         <div v-else class="card-body">
           <div class="balance-container">
             <div class="balance-info">
-              <div class="balance-label">{{ $t('invite.balance.available') }}</div>
-              <div class="balance-value">{{ currencySymbol }}{{ inviteStats.availableCommission }}</div>
-              <div class="balance-description">{{ $t('invite.balance.description') }}</div>
+              <div class="balance-label">
+                {{ $t("invite.balance.available") }}
+              </div>
+              <div class="balance-value">
+                {{ currencySymbol }}{{ inviteStats.availableCommission }}
+              </div>
+              <div class="balance-description">
+                {{ $t("invite.balance.description") }}
+              </div>
             </div>
             <div class="balance-actions">
               <button class="btn-primary" @click="toggleTransferCard">
                 <IconCash class="btn-icon" />
-                {{ $t('invite.balance.transferToBalance') }}
+                {{ $t("invite.balance.transferToBalance") }}
               </button>
-              <button v-if="withdrawClose === 0" class="btn-primary withdraw-btn" @click="toggleWithdrawCard">
+              <button
+                v-if="withdrawClose === 0"
+                class="btn-primary withdraw-btn"
+                @click="toggleWithdrawCard"
+              >
                 <IconReceipt class="btn-icon" />
-                {{ $t('invite.balance.withdraw') }}
+                {{ $t("invite.balance.withdraw") }}
               </button>
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- 划转到余额弹窗 -->
       <transition name="modal-fade">
-        <div v-if="showTransferCardState" class="modal-overlay" @click="showTransferCardState = false">
+        <div
+          v-if="showTransferCardState"
+          class="modal-overlay"
+          @click="showTransferCardState = false"
+        >
           <div class="modal-content" @click.stop>
             <div class="modal-header">
-              <h3>{{ $t('invite.transfer.title') }}</h3>
-              <button class="modal-close" @click="showTransferCardState = false">
+              <h3>{{ $t("invite.transfer.title") }}</h3>
+              <button
+                class="modal-close"
+                @click="showTransferCardState = false"
+              >
                 <IconX :size="20" />
               </button>
             </div>
@@ -186,20 +221,26 @@
               <div class="alert alert-warning">
                 <IconAlertTriangle :size="22" class="alert-icon" />
                 <div class="alert-content">
-                  <div class="alert-title">{{ $t('invite.transfer.warning') }}</div>
-                  <div class="alert-desc">{{ $t('invite.transfer.warningDesc') }}</div>
+                  <div class="alert-title">
+                    {{ $t("invite.transfer.warning") }}
+                  </div>
+                  <div class="alert-desc">
+                    {{ $t("invite.transfer.warningDesc") }}
+                  </div>
                 </div>
               </div>
-              
+
               <div class="transfer-form">
                 <div class="form-group">
-                  <label class="form-label">{{ $t('invite.transfer.amount') }}</label>
+                  <label class="form-label">{{
+                    $t("invite.transfer.amount")
+                  }}</label>
                   <div class="input-with-prefix">
                     <div class="input-prefix">{{ currencySymbol }}</div>
-                    <input 
-                      type="number" 
-                      v-model="transferAmount" 
-                      class="form-control" 
+                    <input
+                      type="number"
+                      v-model="transferAmount"
+                      class="form-control"
                       :placeholder="$t('invite.transfer.amountPlaceholder')"
                       min="0"
                       :max="inviteStats.availableCommission"
@@ -207,92 +248,115 @@
                     />
                   </div>
                   <div class="form-hint">
-                    {{ $t('invite.transfer.availableCommission') }}: {{ currencySymbol }}{{ inviteStats.availableCommission }}
+                    {{ $t("invite.transfer.availableCommission") }}:
+                    {{ currencySymbol }}{{ inviteStats.availableCommission }}
                   </div>
-                  <div v-if="transferError" class="error-message">{{ transferError }}</div>
+                  <div v-if="transferError" class="error-message">
+                    {{ transferError }}
+                  </div>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <button class="btn-cancel" @click="showTransferCardState = false">
-                {{ $t('common.cancel') }}
+                {{ $t("common.cancel") }}
               </button>
-              <button 
-                class="btn-submit" 
+              <button
+                class="btn-submit"
                 @click="confirmTransfer"
                 :disabled="isTransferDisabled || transferLoading"
               >
                 <div v-if="transferLoading" class="loader"></div>
-                <span v-else>{{ $t('invite.transfer.confirm') }}</span>
+                <span v-else>{{ $t("invite.transfer.confirm") }}</span>
               </button>
             </div>
           </div>
         </div>
       </transition>
-      
+
       <!-- 提现弹窗 -->
       <transition name="modal-fade">
-        <div v-if="showWithdrawCard" class="modal-overlay" @click="closeWithdrawCard()">
+        <div
+          v-if="showWithdrawCard"
+          class="modal-overlay"
+          @click="closeWithdrawCard()"
+        >
           <div class="modal-content" @click.stop>
             <div class="modal-header">
-              <h3>{{ $t('invite.withdraw.title') }}</h3>
+              <h3>{{ $t("invite.withdraw.title") }}</h3>
               <button class="modal-close" @click="closeWithdrawCard()">
                 <IconX :size="20" />
               </button>
             </div>
             <div class="modal-body">
-              <div v-if="withdrawMethods.length === 0" class="alert alert-warning">
+              <div
+                v-if="withdrawMethods.length === 0"
+                class="alert alert-warning"
+              >
                 <IconAlertTriangle :size="22" class="alert-icon" />
                 <div class="alert-content">
-                  <div class="alert-title">{{ $t('invite.withdraw.tip') }}</div>
-                  <div class="alert-desc">{{ $t('invite.withdraw.noPlatforms') }}</div>
+                  <div class="alert-title">{{ $t("invite.withdraw.tip") }}</div>
+                  <div class="alert-desc">
+                    {{ $t("invite.withdraw.noPlatforms") }}
+                  </div>
                 </div>
               </div>
-              
-              <div v-else-if="parseFloat(inviteStats.availableCommission) <= 0" class="alert alert-warning">
+
+              <div
+                v-else-if="parseFloat(inviteStats.availableCommission) <= 0"
+                class="alert alert-warning"
+              >
                 <IconAlertTriangle :size="22" class="alert-icon" />
                 <div class="alert-content">
-                  <div class="alert-title">{{ $t('invite.withdraw.tip') }}</div>
-                  <div class="alert-desc">{{ $t('invite.withdraw.insufficientFunds') }}</div>
+                  <div class="alert-title">{{ $t("invite.withdraw.tip") }}</div>
+                  <div class="alert-desc">
+                    {{ $t("invite.withdraw.insufficientFunds") }}
+                  </div>
                 </div>
               </div>
-              
+
               <div v-else class="transfer-form">
                 <div class="form-group">
-                  <label class="form-label">{{ $t('invite.withdraw.platform') }}</label>
+                  <label class="form-label">{{
+                    $t("invite.withdraw.platform")
+                  }}</label>
                   <div class="withdraw-methods">
                     <button
                       v-for="(method, index) in withdrawMethods"
                       :key="index"
                       class="withdraw-method"
-                      :class="{ 'active': selectedWithdrawMethod === method }"
+                      :class="{ active: selectedWithdrawMethod === method }"
                       @click="selectWithdrawMethod(method)"
                     >
                       {{ method }}
                     </button>
                   </div>
                 </div>
-                
+
                 <div class="form-group">
-                  <label class="form-label">{{ $t('invite.withdraw.account') }}</label>
+                  <label class="form-label">{{
+                    $t("invite.withdraw.account")
+                  }}</label>
                   <div class="input-with-prefix account-input">
-                    <input 
-                      type="text" 
-                      v-model="withdrawAccount" 
-                      class="form-control" 
+                    <input
+                      type="text"
+                      v-model="withdrawAccount"
+                      class="form-control"
                       :placeholder="$t('invite.withdraw.accountPlaceholder')"
                     />
                   </div>
                 </div>
-                
+
                 <div class="form-group">
-                  <label class="form-label">{{ $t('invite.withdraw.amount') }}</label>
+                  <label class="form-label">{{
+                    $t("invite.withdraw.amount")
+                  }}</label>
                   <div class="input-with-prefix">
                     <div class="input-prefix">{{ currencySymbol }}</div>
-                    <input 
-                      type="number" 
-                      v-model="withdrawAmount" 
-                      class="form-control" 
+                    <input
+                      type="number"
+                      v-model="withdrawAmount"
+                      class="form-control"
                       :placeholder="$t('invite.withdraw.amountPlaceholder')"
                       min="0"
                       :max="inviteStats.availableCommission"
@@ -300,42 +364,68 @@
                     />
                   </div>
                   <div class="form-hint">
-                    {{ $t('invite.withdraw.availableCommission') }}: {{ currencySymbol }}{{ inviteStats.availableCommission }}
-                    <span v-if="minWithdrawAmount > 0" class="min-withdraw-hint">
-                      ({{ $t('invite.withdraw.minWithdrawAmount') }}: {{ currencySymbol }}{{ minWithdrawAmount }})
+                    {{ $t("invite.withdraw.availableCommission") }}:
+                    {{ currencySymbol }}{{ inviteStats.availableCommission }}
+                    <span
+                      v-if="minWithdrawAmount > 0"
+                      class="min-withdraw-hint"
+                    >
+                      ({{ $t("invite.withdraw.minWithdrawAmount") }}:
+                      {{ currencySymbol }}{{ minWithdrawAmount }})
                     </span>
                   </div>
                 </div>
-                
-                <div v-if="withdrawError && withdrawError !== t('invite.withdraw.insufficientFunds')" class="error-message">{{ withdrawError }}</div>
+
+                <div
+                  v-if="
+                    withdrawError &&
+                    withdrawError !== t('invite.withdraw.insufficientFunds')
+                  "
+                  class="error-message"
+                >
+                  {{ withdrawError }}
+                </div>
               </div>
             </div>
             <div class="modal-footer">
               <button class="btn-cancel" @click="closeWithdrawCard">
-                {{ $t('common.cancel') }}
+                {{ $t("common.cancel") }}
               </button>
-              <button 
-                class="btn-submit" 
+              <button
+                class="btn-submit"
                 @click="submitWithdraw"
-                :disabled="!withdrawAccount || !selectedWithdrawMethod || withdrawLoading || parseFloat(inviteStats.availableCommission) <= 0"
+                :disabled="
+                  !withdrawAccount ||
+                  !selectedWithdrawMethod ||
+                  withdrawLoading ||
+                  parseFloat(inviteStats.availableCommission) <= 0
+                "
               >
                 <div v-if="withdrawLoading" class="loader"></div>
-                <span v-else>{{ $t('invite.withdraw.confirm') }}</span>
+                <span v-else>{{ $t("invite.withdraw.confirm") }}</span>
               </button>
             </div>
           </div>
         </div>
       </transition>
-      
+
       <!-- 邀请链接卡片 -->
       <div class="dashboard-card">
         <div class="card-header">
-          <h2 class="card-title">{{ $t('invite.inviteLink.title') }}</h2>
+          <h2 class="card-title">{{ $t("invite.inviteLink.title") }}</h2>
           <div class="card-actions">
-            <button class="btn-action" @click="createInviteCode" :disabled="creatingCode">
+            <button
+              class="btn-action"
+              @click="createInviteCode"
+              :disabled="creatingCode"
+            >
               <div v-if="creatingCode" class="loading-icon"></div>
               <IconPlus v-else class="action-icon" />
-              {{ creatingCode ? $t('invite.inviteLink.creating') : $t('invite.inviteLink.createCode') }}
+              {{
+                creatingCode
+                  ? $t("invite.inviteLink.creating")
+                  : $t("invite.inviteLink.createCode")
+              }}
             </button>
           </div>
         </div>
@@ -347,115 +437,166 @@
           <template v-if="inviteCodes.length > 0">
             <div class="invite-codes-wrapper">
               <div class="invite-cards-container">
-                <div class="invite-cards-nav prev" @click="prevInviteCode" v-if="inviteCodes.length > 1">
+                <div
+                  class="invite-cards-nav prev"
+                  @click="prevInviteCode"
+                  v-if="inviteCodes.length > 1"
+                >
                   <IconChevronLeft />
                 </div>
-                
+
                 <div class="invite-cards-wrapper">
-                  <transition-group name="invite-card" tag="div" class="invite-cards">
-                    <div 
-                      v-for="(code, index) in inviteCodes" 
-                      :key="code.id || 'invite-code-' + index" 
+                  <transition-group
+                    name="invite-card"
+                    tag="div"
+                    class="invite-cards"
+                  >
+                    <div
+                      v-for="(code, index) in inviteCodes"
+                      :key="code.id || 'invite-code-' + index"
                       class="invite-card"
-                      :class="{ 'active': selectedCodeIndex === index, 'prev': index < selectedCodeIndex, 'next': index > selectedCodeIndex }"
+                      :class="{
+                        active: selectedCodeIndex === index,
+                        prev: index < selectedCodeIndex,
+                        next: index > selectedCodeIndex,
+                      }"
                       @click="selectedCodeIndex = index"
                     >
                       <div class="invite-card-inner">
                         <div class="card-shine"></div>
                         <div class="card-decoration"></div>
-                        
+
                         <div class="invite-card-header">
                           <div class="invite-card-title">
                             <IconTicket class="card-icon" />
-                            {{ $t('invite.inviteLink.inviteCode') }} {{ index + 1 }}
+                            {{ $t("invite.inviteLink.inviteCode") }}
+                            {{ index + 1 }}
                           </div>
                         </div>
-                        
+
                         <div class="invite-card-body">
                           <div class="invite-code-display">
-                            <span v-for="(char, i) in code.code" :key="i" class="code-char">{{ char }}</span>
+                            <span
+                              v-for="(char, i) in code.code"
+                              :key="i"
+                              class="code-char"
+                              >{{ char }}</span
+                            >
                           </div>
                         </div>
-                        
+
                         <div class="invite-card-footer">
-                          <div class="card-label">{{ $t('invite.inviteLink.scanDescription') }}</div>
-                          <div class="invite-card-date">{{ $t('invite.inviteLink.createdAt', { date: formatCodeDate(code.created_at) }) }}</div>
+                          <div class="card-label">
+                            {{ $t("invite.inviteLink.scanDescription") }}
+                          </div>
+                          <div class="invite-card-date">
+                            {{
+                              $t("invite.inviteLink.createdAt", {
+                                date: formatCodeDate(code.created_at),
+                              })
+                            }}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </transition-group>
                 </div>
-                
-                <div class="invite-cards-nav next" @click="nextInviteCode" v-if="inviteCodes.length > 1">
+
+                <div
+                  class="invite-cards-nav next"
+                  @click="nextInviteCode"
+                  v-if="inviteCodes.length > 1"
+                >
                   <IconChevronRight />
                 </div>
               </div>
-              
+
               <!-- 添加指示器 -->
-              <div class="invite-cards-indicators" v-if="inviteCodes.length > 1">
-                <span 
-                  v-for="(code, index) in inviteCodes" 
+              <div
+                class="invite-cards-indicators"
+                v-if="inviteCodes.length > 1"
+              >
+                <span
+                  v-for="(code, index) in inviteCodes"
                   :key="code.id"
                   class="indicator"
-                  :class="{ 'active': selectedCodeIndex === index }"
+                  :class="{ active: selectedCodeIndex === index }"
                   @click="selectedCodeIndex = index"
                 ></span>
               </div>
-              
+
               <div class="invite-link-wrapper">
                 <div class="input-with-icon">
                   <IconLink class="input-icon" />
-                  <input 
-                    type="text" 
-                    class="invite-link" 
-                    :value="inviteLink" 
+                  <input
+                    type="text"
+                    class="invite-link"
+                    :value="inviteLink"
                     readonly
                     :placeholder="$t('invite.inviteLink.placeholder')"
                   />
                 </div>
                 <button class="btn-primary" @click="copyInviteLink">
                   <IconCopy class="btn-icon" />
-                  {{ $t('invite.inviteLink.copyLink') }}
+                  {{ $t("invite.inviteLink.copyLink") }}
                 </button>
               </div>
             </div>
-            
+
             <div class="share-buttons mt-3">
               <button class="btn-outline wechat-btn" @click="shareToWechat">
-                <IconBrandWechat class="btn-icon" /> {{ $t('invite.share.wechat') }}
+                <IconBrandWechat class="btn-icon" />
+                {{ $t("invite.share.wechat") }}
               </button>
               <button class="btn-outline qq-btn" @click="shareToQQ">
-                <IconBrandQq class="btn-icon" /> {{ $t('invite.share.qq') }}
+                <IconBrandQq class="btn-icon" /> {{ $t("invite.share.qq") }}
               </button>
               <button class="btn-outline twitter-btn" @click="shareToTwitter">
-                <IconBrandTwitter class="btn-icon" /> {{ $t('invite.share.twitter') }}
+                <IconBrandTwitter class="btn-icon" />
+                {{ $t("invite.share.twitter") }}
               </button>
               <button class="btn-outline telegram-btn" @click="shareToTelegram">
-                <IconBrandTelegram class="btn-icon" /> {{ $t('invite.share.telegram') }}
+                <IconBrandTelegram class="btn-icon" />
+                {{ $t("invite.share.telegram") }}
               </button>
             </div>
           </template>
           <div v-else class="no-invite-code">
-            <p>{{ $t('invite.inviteLink.noInviteCode') }}</p>
-            <button class="btn-primary create-code-btn" @click="createInviteCode" :disabled="creatingCode">
+            <p>{{ $t("invite.inviteLink.noInviteCode") }}</p>
+            <button
+              class="btn-primary create-code-btn"
+              @click="createInviteCode"
+              :disabled="creatingCode"
+            >
               <div v-if="creatingCode" class="loading-icon"></div>
               <span v-else class="create-btn-content">
                 <IconPlus class="btn-icon" />
-                {{ $t('invite.inviteLink.createCode') }}
+                {{ $t("invite.inviteLink.createCode") }}
               </span>
             </button>
           </div>
         </div>
       </div>
-      
+
       <!-- 邀请记录卡片 -->
       <div class="dashboard-card">
         <div class="card-header">
-          <h2 class="card-title">{{ $t('invite.records.title') }}</h2>
+          <h2 class="card-title">{{ $t("invite.records.title") }}</h2>
           <div class="card-actions">
-            <button class="btn-action" @click="refreshRecords" :disabled="loading.inviteDetails">
-              <IconRefresh class="action-icon" :class="{ 'spin': loading.inviteDetails }" />
-              {{ loading.inviteDetails ? $t('invite.records.refreshing') : $t('invite.records.refresh') }}
+            <button
+              class="btn-action"
+              @click="refreshRecords"
+              :disabled="loading.inviteDetails"
+            >
+              <IconRefresh
+                class="action-icon"
+                :class="{ spin: loading.inviteDetails }"
+              />
+              {{
+                loading.inviteDetails
+                  ? $t("invite.records.refreshing")
+                  : $t("invite.records.refresh")
+              }}
             </button>
           </div>
         </div>
@@ -478,116 +619,154 @@
         <div v-else class="card-body">
           <div class="records-table-wrapper">
             <template v-if="inviteRecords.length > 0">
-            <table class="records-table">
-              <thead>
-                <tr>
-                  <th>{{ $t('invite.records.registerTime') }}</th>
-                  <th>{{ $t('invite.records.amount') }}</th>
-                  <th>{{ $t('invite.records.commission') }}</th>
-                  <th>{{ $t('invite.records.status.title') }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="record in paginatedRecords" :key="record.id">
+              <table class="records-table">
+                <thead>
+                  <tr>
+                    <th>{{ $t("invite.records.registerTime") }}</th>
+                    <th>{{ $t("invite.records.amount") }}</th>
+                    <th>{{ $t("invite.records.commission") }}</th>
+                    <th>{{ $t("invite.records.status.title") }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="record in paginatedRecords" :key="record.id">
                     <td>{{ formatDate(record.created_at) }}</td>
-                    <td>{{ currencySymbol }}{{ record.amount || '0.00' }}</td>
+                    <td>{{ currencySymbol }}{{ record.amount || "0.00" }}</td>
                     <td>{{ currencySymbol }}{{ record.commission_amount }}</td>
                     <td>
-                      <span class="status-badge" :class="record.commission_status === 1 ? 'confirmed' : 'pending'">
-                        {{ record.commission_status === 1 ? $t('invite.records.status.confirmed') : $t('invite.records.status.pending') }}
+                      <span
+                        class="status-badge"
+                        :class="
+                          record.commission_status === 1
+                            ? 'confirmed'
+                            : 'pending'
+                        "
+                      >
+                        {{
+                          record.commission_status === 1
+                            ? $t("invite.records.status.confirmed")
+                            : $t("invite.records.status.pending")
+                        }}
                       </span>
                     </td>
-                </tr>
-              </tbody>
-            </table>
-            
-            <!-- 添加分页控件 -->
-            <div class="pagination-controls" v-if="totalPages > 1">
-              <button 
-                class="page-btn prev-btn" 
-                @click="handlePageChange(currentPage - 1)" 
-                :disabled="currentPage === 1 || loading.inviteDetails"
-              >
-                <IconChevronLeft size="16" />
-              </button>
-              
-              <div class="page-numbers">
-                <!-- 第一页 - 仅在桌面端显示 -->
-                <button 
-                  v-if="totalPages > 4 && currentPage > 3 && !isMobile" 
-                  class="page-btn" 
-                  :class="{ active: currentPage === 1 }"
-                  @click="handlePageChange(1)"
-                  :disabled="loading.inviteDetails"
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- 添加分页控件 -->
+              <div class="pagination-controls" v-if="totalPages > 1">
+                <button
+                  class="page-btn prev-btn"
+                  @click="handlePageChange(currentPage - 1)"
+                  :disabled="currentPage === 1 || loading.inviteDetails"
                 >
-                  1
+                  <IconChevronLeft size="16" />
                 </button>
-                
-                <!-- 省略号 - 仅在桌面端显示 -->
-                <span v-if="totalPages > 4 && currentPage > 3 && !isMobile" class="page-ellipsis">...</span>
-                
-                <!-- 页码按钮 -->
-                <template v-for="page in displayPageNumbers" :key="'page-'+page">
-                  <button 
+
+                <div class="page-numbers">
+                  <!-- 第一页 - 仅在桌面端显示 -->
+                  <button
+                    v-if="totalPages > 4 && currentPage > 3 && !isMobile"
                     class="page-btn"
-                    :class="{ active: currentPage === page }"
-                    @click="handlePageChange(page)"
+                    :class="{ active: currentPage === 1 }"
+                    @click="handlePageChange(1)"
                     :disabled="loading.inviteDetails"
                   >
-                    {{ page }}
+                    1
                   </button>
-                </template>
-                
-                <!-- 省略号 - 仅在桌面端显示 -->
-                <span v-if="totalPages > 4 && currentPage < totalPages - 2 && !isMobile" class="page-ellipsis">...</span>
-                
-                <!-- 最后一页 - 仅在桌面端显示 -->
-                <button 
-                  v-if="totalPages > 4 && currentPage < totalPages - 2 && !isMobile" 
-                  class="page-btn" 
-                  :class="{ active: currentPage === totalPages }"
-                  @click="handlePageChange(totalPages)"
-                  :disabled="loading.inviteDetails"
+
+                  <!-- 省略号 - 仅在桌面端显示 -->
+                  <span
+                    v-if="totalPages > 4 && currentPage > 3 && !isMobile"
+                    class="page-ellipsis"
+                    >...</span
+                  >
+
+                  <!-- 页码按钮 -->
+                  <template
+                    v-for="page in displayPageNumbers"
+                    :key="'page-' + page"
+                  >
+                    <button
+                      class="page-btn"
+                      :class="{ active: currentPage === page }"
+                      @click="handlePageChange(page)"
+                      :disabled="loading.inviteDetails"
+                    >
+                      {{ page }}
+                    </button>
+                  </template>
+
+                  <!-- 省略号 - 仅在桌面端显示 -->
+                  <span
+                    v-if="
+                      totalPages > 4 &&
+                      currentPage < totalPages - 2 &&
+                      !isMobile
+                    "
+                    class="page-ellipsis"
+                    >...</span
+                  >
+
+                  <!-- 最后一页 - 仅在桌面端显示 -->
+                  <button
+                    v-if="
+                      totalPages > 4 &&
+                      currentPage < totalPages - 2 &&
+                      !isMobile
+                    "
+                    class="page-btn"
+                    :class="{ active: currentPage === totalPages }"
+                    @click="handlePageChange(totalPages)"
+                    :disabled="loading.inviteDetails"
+                  >
+                    {{ totalPages }}
+                  </button>
+                </div>
+
+                <button
+                  class="page-btn next-btn"
+                  @click="handlePageChange(currentPage + 1)"
+                  :disabled="
+                    currentPage === totalPages || loading.inviteDetails
+                  "
                 >
-                  {{ totalPages }}
+                  <IconChevronRight size="16" />
                 </button>
-              </div>
-              
-              <button 
-                class="page-btn next-btn" 
-                @click="handlePageChange(currentPage + 1)" 
-                :disabled="currentPage === totalPages || loading.inviteDetails"
-              >
-                <IconChevronRight size="16" />
-              </button>
-              
-              <!-- 添加每页显示数量选择器 -->
-              <div class="page-size-container">
-                <div class="page-size-selector" @click="togglePageSizeDropdown" :class="{ disabled: loading.inviteDetails }">
-                  <div class="select-value">{{ pageSize }}</div>
-                  <div class="select-icon">
-                    <IconChevronDown :class="{ 'rotate-180': showPageSizeDropdown }" />
-                  </div>
-                  
-                  <transition name="fade">
-                    <div class="select-dropdown" v-if="showPageSizeDropdown">
-                      <div 
-                        v-for="size in pageSizeOptions" 
-                        :key="size"
-                        class="select-option"
-                        :class="{ selected: size === pageSize }"
-                        @click.stop="selectPageSize(size)"
-                      >
-                        {{ size }}
-                      </div>
+
+                <!-- 添加每页显示数量选择器 -->
+                <div class="page-size-container">
+                  <div
+                    class="page-size-selector"
+                    @click="togglePageSizeDropdown"
+                    :class="{ disabled: loading.inviteDetails }"
+                  >
+                    <div class="select-value">{{ pageSize }}</div>
+                    <div class="select-icon">
+                      <IconChevronDown
+                        :class="{ 'rotate-180': showPageSizeDropdown }"
+                      />
                     </div>
-                  </transition>
+
+                    <transition name="fade">
+                      <div class="select-dropdown" v-if="showPageSizeDropdown">
+                        <div
+                          v-for="size in pageSizeOptions"
+                          :key="size"
+                          class="select-option"
+                          :class="{ selected: size === pageSize }"
+                          @click.stop="selectPageSize(size)"
+                        >
+                          {{ size }}
+                        </div>
+                      </div>
+                    </transition>
+                  </div>
                 </div>
               </div>
-            </div>
             </template>
             <div v-else class="empty-records">
-              <p>{{ $t('invite.records.noRecords') }}</p>
+              <p>{{ $t("invite.records.noRecords") }}</p>
             </div>
           </div>
         </div>
@@ -597,11 +776,18 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
-import { ref, computed, onMounted, onUnmounted, reactive, nextTick } from 'vue';
-import { useToast } from '@/composables/useToast';
-import { INVITE_CONFIG } from '@/utils/baseConfig';
-import { getInviteData, getInviteDetails, getCommissionConfig, generateInviteCode, transferCommission, withdrawCommission } from '@/api/invite';
+import { useI18n } from "vue-i18n";
+import { ref, computed, onMounted, onUnmounted, reactive, nextTick } from "vue";
+import { useToast } from "@/composables/useToast";
+import { INVITE_CONFIG } from "@/utils/baseConfig";
+import {
+  getInviteData,
+  getInviteDetails,
+  getCommissionConfig,
+  generateInviteCode,
+  transferCommission,
+  withdrawCommission,
+} from "@/api/invite";
 import {
   IconUsers,
   IconCoin,
@@ -626,10 +812,10 @@ import {
   IconTicket,
   IconAlertTriangle,
   IconReceipt,
-} from '@tabler/icons-vue';
+} from "@tabler/icons-vue";
 
 export default {
-  name: 'InviteView',
+  name: "InviteView",
   components: {
     IconUsers,
     IconCoin,
@@ -658,135 +844,149 @@ export default {
   setup() {
     const { showToast } = useToast();
     const { t } = useI18n();
-    
+
     const loading = reactive({
       inviteData: true,
       inviteDetails: true,
-      commConfig: true
+      commConfig: true,
     });
-    
+
     const creatingCode = ref(false);
-    
-    const currency = ref('CNY');
-    const currencySymbol = ref('¥');
-    
+
+    const currency = ref("CNY");
+    const currencySymbol = ref("¥");
+
     const inviteCodes = ref([]);
     const selectedCodeIndex = ref(0);
-    
+
     const inviteStats = reactive({
       registeredUsers: 0,
       validCommission: 0,
       pendingCommission: 0,
       commissionRate: 0,
-      availableCommission: 0
+      availableCommission: 0,
     });
-    
+
     const inviteRecords = ref([]);
-    
+
     const currentPage = ref(1);
     const pageSize = ref(INVITE_CONFIG.recordsPerPage || 10);
     const totalRecords = ref(0);
-    
+
     const pageSizeOptions = [10, 20, 50, 100, 200];
     const showPageSizeDropdown = ref(false);
-    
+
     const togglePageSizeDropdown = () => {
       showPageSizeDropdown.value = !showPageSizeDropdown.value;
     };
-    
+
     const selectPageSize = (size) => {
       if (pageSize.value !== size) {
         pageSize.value = size;
-        currentPage.value = 1; 
-        fetchInviteDetails(1); 
+        currentPage.value = 1;
+        fetchInviteDetails(1);
       }
       showPageSizeDropdown.value = false;
     };
-    
+
     const closePageSizeDropdownOnClickOutside = (event) => {
-      const dropdown = document.querySelector('.page-size-selector');
+      const dropdown = document.querySelector(".page-size-selector");
       if (dropdown && !dropdown.contains(event.target)) {
         showPageSizeDropdown.value = false;
       }
     };
-    
+
     const paginatedRecords = computed(() => inviteRecords.value);
-    
+
     const totalPages = computed(() => {
       return Math.ceil(totalRecords.value / pageSize.value);
     });
-    
+
     const displayPageNumbers = computed(() => {
       const pages = [];
-      const maxVisiblePages = isMobile.value ? 1 : 3; 
-      
+      const maxVisiblePages = isMobile.value ? 1 : 3;
+
       if (totalPages.value <= maxVisiblePages) {
         for (let i = 1; i <= totalPages.value; i++) {
           pages.push(i);
         }
       } else {
-        let startPage = Math.max(currentPage.value - Math.floor(maxVisiblePages / 2), 1);
+        let startPage = Math.max(
+          currentPage.value - Math.floor(maxVisiblePages / 2),
+          1
+        );
         let endPage = startPage + maxVisiblePages - 1;
-        
+
         if (endPage > totalPages.value) {
           endPage = totalPages.value;
           startPage = Math.max(endPage - maxVisiblePages + 1, 1);
         }
-        
+
         for (let i = startPage; i <= endPage; i++) {
           pages.push(i);
         }
       }
-      
+
       return pages;
     });
-    
+
     const handlePageChange = (page) => {
       if (page < 1) {
         page = 1;
       } else if (page > totalPages.value) {
         page = totalPages.value;
       }
-      
+
       if (page !== currentPage.value) {
         currentPage.value = page;
         fetchInviteDetails(page);
-        
+
         nextTick(() => {
-          const tableElement = document.querySelector('.records-table-wrapper');
+          const tableElement = document.querySelector(".records-table-wrapper");
           if (tableElement) {
-            tableElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            tableElement.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+            });
           }
         });
       }
     };
-    
+
     const inviteLink = computed(() => {
-      if (inviteCodes.value.length === 0 || selectedCodeIndex.value >= inviteCodes.value.length) {
-        return '';
+      if (
+        inviteCodes.value.length === 0 ||
+        selectedCodeIndex.value >= inviteCodes.value.length
+      ) {
+        return "";
       }
       const code = inviteCodes.value[selectedCodeIndex.value].code;
-      
-      if (INVITE_CONFIG.inviteLinkConfig && INVITE_CONFIG.inviteLinkConfig.linkMode === 'custom') {
+
+      if (
+        INVITE_CONFIG.inviteLinkConfig &&
+        INVITE_CONFIG.inviteLinkConfig.linkMode === "custom"
+      ) {
         const customDomain = INVITE_CONFIG.inviteLinkConfig.customDomain;
-        const domain = customDomain.endsWith('/') ? customDomain.slice(0, -1) : customDomain;
+        const domain = customDomain.endsWith("/")
+          ? customDomain.slice(0, -1)
+          : customDomain;
         return `${domain}/#/register?code=${code}`;
       } else {
         return `${window.location.origin}/#/register?code=${code}`;
       }
     });
-    
+
     const createInviteCode = async () => {
       if (creatingCode.value) return;
-      
+
       creatingCode.value = true;
-      
+
       try {
         const res = await generateInviteCode();
-        
+
         if (res.data) {
           await fetchInviteData();
-          handleSuccess(t('invite.inviteLink.created'));
+          handleSuccess(t("invite.inviteLink.created"));
         }
       } catch (error) {
         handleError(error);
@@ -794,66 +994,69 @@ export default {
         creatingCode.value = false;
       }
     };
-    
+
     const copyInviteLink = () => {
       if (!inviteLink.value) return;
-      
-      navigator.clipboard.writeText(inviteLink.value)
+
+      navigator.clipboard
+        .writeText(inviteLink.value)
         .then(() => {
-          handleSuccess(t('invite.inviteLink.copied'));
+          handleSuccess(t("invite.inviteLink.copied"));
         })
         .catch(() => {
-          const textarea = document.createElement('textarea');
+          const textarea = document.createElement("textarea");
           textarea.value = inviteLink.value;
-          textarea.style.position = 'fixed';
+          textarea.style.position = "fixed";
           document.body.appendChild(textarea);
           textarea.focus();
           textarea.select();
-          
+
           try {
-            const successful = document.execCommand('copy');
+            const successful = document.execCommand("copy");
             if (successful) {
-              handleSuccess(t('invite.inviteLink.copied'));
+              handleSuccess(t("invite.inviteLink.copied"));
             } else {
-              throw new Error('Copy failed');
+              throw new Error("Copy failed");
             }
           } catch (err) {
-            handleError({ message: t('common.copyFailed') });
+            handleError({ message: t("common.copyFailed") });
           }
-          
+
           document.body.removeChild(textarea);
         });
     };
-    
+
     const showConfirmModal = ref(false);
-    const confirmModalMessage = ref('');
+    const confirmModalMessage = ref("");
     const pendingAction = ref(null);
-    
+
     const confirmAction = () => {
       if (pendingAction.value) {
         pendingAction.value();
       }
       showConfirmModal.value = false;
     };
-    
+
     const cancelConfirmation = () => {
       showConfirmModal.value = false;
       pendingAction.value = null;
     };
-    
+
     const shareToWechat = () => {
       if (!inviteLink.value) {
-        showToast(t('invite.share.noLinkAvailable'), 'error');
+        showToast(t("invite.share.noLinkAvailable"), "error");
         return;
       }
-      
-      const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(inviteLink.value)}`;
-      
-      const win = window.open('', '_blank', 'width=600,height=400');
+
+      const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(
+        inviteLink.value
+      )}`;
+
+      const win = window.open("", "_blank", "width=600,height=400");
       win.document.write(`
         <html>
           <head>
-            <title>${t('invite.share.scanTitle')}</title>
+            <title>${t("invite.share.scanTitle")}</title>
             <style>
               body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
               img { max-width: 100%; height: auto; margin-bottom: 20px; }
@@ -862,78 +1065,105 @@ export default {
             </style>
           </head>
           <body>
-            <h2>${t('invite.share.scanQRCode')}</h2>
-            <img src="${qrCodeUrl}" alt="${t('invite.share.inviteQRCode')}" />
-            <p>${t('invite.share.orCopyLink')}: ${inviteLink.value}</p>
+            <h2>${t("invite.share.scanQRCode")}</h2>
+            <img src="${qrCodeUrl}" alt="${t("invite.share.inviteQRCode")}" />
+            <p>${t("invite.share.orCopyLink")}: ${inviteLink.value}</p>
           </body>
         </html>
       `);
     };
-    
+
     const shareToTwitter = () => {
       if (!inviteLink.value) {
-        showToast(t('invite.share.noLinkAvailable'), 'error');
+        showToast(t("invite.share.noLinkAvailable"), "error");
         return;
       }
-      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(t('invite.share.shareDescription'))}&url=${encodeURIComponent(inviteLink.value)}`, '_blank');
+      window.open(
+        `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+          t("invite.share.shareDescription")
+        )}&url=${encodeURIComponent(inviteLink.value)}`,
+        "_blank"
+      );
     };
-    
+
     const shareToTelegram = () => {
       if (!inviteLink.value) {
-        showToast(t('invite.share.noLinkAvailable'), 'error');
+        showToast(t("invite.share.noLinkAvailable"), "error");
         return;
       }
-      window.open(`https://t.me/share/url?url=${encodeURIComponent(inviteLink.value)}&text=${encodeURIComponent(t('invite.share.shareDescription'))}`, '_blank');
+      window.open(
+        `https://t.me/share/url?url=${encodeURIComponent(
+          inviteLink.value
+        )}&text=${encodeURIComponent(t("invite.share.shareDescription"))}`,
+        "_blank"
+      );
     };
-    
+
     const shareToQQ = () => {
       if (!inviteLink.value) {
-        showToast(t('invite.share.noLinkAvailable'), 'error');
+        showToast(t("invite.share.noLinkAvailable"), "error");
         return;
       }
-      window.open(`https://connect.qq.com/widget/shareqq/index.html?url=${encodeURIComponent(inviteLink.value)}&title=${encodeURIComponent(t('invite.share.shareTitle'))}&desc=${encodeURIComponent(t('invite.share.shareDescription'))}`, '_blank');
+      window.open(
+        `https://connect.qq.com/widget/shareqq/index.html?url=${encodeURIComponent(
+          inviteLink.value
+        )}&title=${encodeURIComponent(
+          t("invite.share.shareTitle")
+        )}&desc=${encodeURIComponent(t("invite.share.shareDescription"))}`,
+        "_blank"
+      );
     };
-    
+
     const refreshRecords = () => {
       if (loading.inviteDetails) return;
-      
-      showToast(t('invite.records.refreshingData'), 'info');
-      currentPage.value = 1; 
+
+      showToast(t("invite.records.refreshingData"), "info");
+      currentPage.value = 1;
       fetchInviteDetails(1);
     };
-    
+
     const formatDate = (timestamp) => {
-      if (!timestamp) return '-';
+      if (!timestamp) return "-";
       const date = new Date(timestamp * 1000);
       const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      const hours = String(date.getHours()).padStart(2, '0');
-      const minutes = String(date.getMinutes()).padStart(2, '0');
-      
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+
       return `${year}-${month}-${day} ${hours}:${minutes}`;
     };
-    
+
     const getStatusClass = (status) => {
       switch (status) {
-        case 0: return 'waiting';  
-        case 1: return 'pending';  
-        case 2: return 'success';  
-        case 3: return 'danger';   
-        default: return 'waiting';
+        case 0:
+          return "waiting";
+        case 1:
+          return "pending";
+        case 2:
+          return "success";
+        case 3:
+          return "danger";
+        default:
+          return "waiting";
       }
     };
-    
+
     const getStatusText = (status) => {
       switch (status) {
-        case 0: return t('invite.records.status.waiting');
-        case 1: return t('invite.records.status.processing');
-        case 2: return t('invite.records.status.confirmed');
-        case 3: return t('invite.records.status.invalid');
-        default: return t('invite.records.status.unknown');
+        case 0:
+          return t("invite.records.status.waiting");
+        case 1:
+          return t("invite.records.status.processing");
+        case 2:
+          return t("invite.records.status.confirmed");
+        case 3:
+          return t("invite.records.status.invalid");
+        default:
+          return t("invite.records.status.unknown");
       }
     };
-    
+
     const fetchInviteData = async () => {
       loading.inviteData = true;
       try {
@@ -942,365 +1172,403 @@ export default {
           inviteCodes.value = res.data.codes || [];
           if (res.data.stat) {
             inviteStats.registeredUsers = res.data.stat[0] || 0;
-            inviteStats.validCommission = ((res.data.stat[1] || 0) / 100).toFixed(2); 
-            inviteStats.pendingCommission = ((res.data.stat[2] || 0) / 100).toFixed(2); 
+            inviteStats.validCommission = (
+              (res.data.stat[1] || 0) / 100
+            ).toFixed(2);
+            inviteStats.pendingCommission = (
+              (res.data.stat[2] || 0) / 100
+            ).toFixed(2);
             inviteStats.commissionRate = res.data.stat[3] || 0;
-            inviteStats.availableCommission = ((res.data.stat[4] || 0) / 100).toFixed(2); 
+            inviteStats.availableCommission = (
+              (res.data.stat[4] || 0) / 100
+            ).toFixed(2);
           }
         }
       } catch (err) {
-        console.error('获取邀请数据失败:', err);
-        showToast(t('invite.records.fetchDataError'), 'error');
+        console.error("获取邀请数据失败:", err);
+        showToast(t("invite.records.fetchDataError"), "error");
       } finally {
         loading.inviteData = false;
       }
     };
-    
+
     const fetchInviteDetails = async (page = 1) => {
       loading.inviteDetails = true;
       try {
         const recordsPerPage = Math.max(pageSize.value, 10);
         const res = await getInviteDetails(page, recordsPerPage);
-        
+
         if (res.data) {
-          inviteRecords.value = Array.isArray(res.data) ? res.data.map(record => ({
-            id: record.id,
-            trade_no: record.trade_no,
-            created_at: record.created_at,
-            user: record.user || null,
-            amount: record.order_amount ? (record.order_amount / 100).toFixed(2) : '0.00',
-            commission_amount: record.get_amount ? (record.get_amount / 100).toFixed(2) : '0.00',
-            commission_status: 1 
-          })) : [];
-          
+          inviteRecords.value = Array.isArray(res.data)
+            ? res.data.map((record) => ({
+                id: record.id,
+                trade_no: record.trade_no,
+                created_at: record.created_at,
+                user: record.user || null,
+                amount: record.order_amount
+                  ? (record.order_amount / 100).toFixed(2)
+                  : "0.00",
+                commission_amount: record.get_amount
+                  ? (record.get_amount / 100).toFixed(2)
+                  : "0.00",
+                commission_status: 1,
+              }))
+            : [];
+
           totalRecords.value = res.total || inviteRecords.value.length;
         } else {
           inviteRecords.value = [];
           totalRecords.value = 0;
         }
       } catch (err) {
-        console.error('获取邀请明细失败:', err);
-        showToast(t('invite.records.fetchError'), 'error');
+        console.error("获取邀请明细失败:", err);
+        showToast(t("invite.records.fetchError"), "error");
         inviteRecords.value = [];
         totalRecords.value = 0;
       } finally {
         loading.inviteDetails = false;
       }
     };
-    
+
     const fetchCommConfig = async () => {
       loading.commConfig = true;
       try {
         const res = await getCommissionConfig();
         if (res.data) {
-          currency.value = res.data.currency || 'CNY';
-          currencySymbol.value = res.data.currency_symbol || '¥';
-          
+          currency.value = res.data.currency || "CNY";
+          currencySymbol.value = res.data.currency_symbol || "¥";
+
           withdrawClose.value = Number(res.data.withdraw_close);
-          
-          withdrawMethods.value = res.data.withdraw_methods || []; 
-          
+
+          withdrawMethods.value = res.data.withdraw_methods || [];
+
           if (res.data.min_withdraw_amount) {
-            minWithdrawAmount.value = parseFloat(res.data.min_withdraw_amount) / 100; 
+            minWithdrawAmount.value =
+              parseFloat(res.data.min_withdraw_amount) / 100;
           }
         }
       } catch (err) {
-        console.error('获取佣金配置失败:', err);
+        console.error("获取佣金配置失败:", err);
       } finally {
         loading.commConfig = false;
       }
     };
-    
+
     const prevInviteCode = () => {
       if (inviteCodes.value.length > 1) {
-        selectedCodeIndex.value = (selectedCodeIndex.value - 1 + inviteCodes.value.length) % inviteCodes.value.length;
+        selectedCodeIndex.value =
+          (selectedCodeIndex.value - 1 + inviteCodes.value.length) %
+          inviteCodes.value.length;
       }
     };
-    
+
     const nextInviteCode = () => {
       if (inviteCodes.value.length > 1) {
-        selectedCodeIndex.value = (selectedCodeIndex.value + 1) % inviteCodes.value.length;
+        selectedCodeIndex.value =
+          (selectedCodeIndex.value + 1) % inviteCodes.value.length;
       }
     };
-    
+
     const formatCodeDate = (timestamp) => {
-      if (!timestamp) return '';
+      if (!timestamp) return "";
       const date = new Date(timestamp * 1000);
       const year = date.getFullYear();
       const month = date.getMonth() + 1;
       const day = date.getDate();
-      return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+      return `${year}-${month.toString().padStart(2, "0")}-${day
+        .toString()
+        .padStart(2, "0")}`;
     };
-    
+
     const showTransferCardState = ref(false);
     const transferAmount = ref(0);
-    const transferError = ref('');
+    const transferError = ref("");
     const transferLoading = ref(false);
-    const isTransferDisabled = computed(() => transferAmount.value <= 0 || transferAmount.value > inviteStats.availableCommission);
-    
+    const isTransferDisabled = computed(
+      () =>
+        transferAmount.value <= 0 ||
+        transferAmount.value > inviteStats.availableCommission
+    );
+
     const toggleTransferCard = () => {
       if (showWithdrawCard.value) {
-        pendingCardAction.value = 'transfer';
+        pendingCardAction.value = "transfer";
         showWithdrawCard.value = false;
       } else {
         showTransferCardState.value = true;
-        transferAmount.value = '';
-        transferError.value = '';
+        transferAmount.value = "";
+        transferError.value = "";
       }
     };
-    
+
     const validateTransferAmount = () => {
-      transferError.value = '';
-      
+      transferError.value = "";
+
       if (!transferAmount.value || parseFloat(transferAmount.value) <= 0) {
-        transferError.value = t('invite.transfer.invalidAmount');
+        transferError.value = t("invite.transfer.invalidAmount");
         return false;
       }
-      
-      if (parseFloat(transferAmount.value) > parseFloat(inviteStats.availableCommission)) {
-        transferError.value = t('invite.transfer.insufficientFunds');
+
+      if (
+        parseFloat(transferAmount.value) >
+        parseFloat(inviteStats.availableCommission)
+      ) {
+        transferError.value = t("invite.transfer.insufficientFunds");
         return false;
       }
-      
+
       return true;
     };
-    
+
     const confirmTransfer = async () => {
       if (!validateTransferAmount()) return;
-      
+
       transferLoading.value = true;
-      
+
       try {
-        const amountInCents = Math.round(parseFloat(transferAmount.value) * 100);
+        const amountInCents = Math.round(
+          parseFloat(transferAmount.value) * 100
+        );
         const res = await transferCommission(amountInCents);
-        
+
         if (res.data === true) {
           transferAmount.value = 0;
-          transferError.value = '';
-          
-          handleSuccess(t('invite.transfer.success'));
-          
+          transferError.value = "";
+
+          handleSuccess(t("invite.transfer.success"));
+
           await fetchInviteData();
-          
+
           showTransferCardState.value = false;
         } else {
-          transferError.value = res.message || t('invite.transfer.failure');
+          transferError.value = res.message || t("invite.transfer.failure");
         }
       } catch (error) {
         handleError(error);
-        transferError.value = error.response?.message || t('invite.transfer.failure');
+        transferError.value =
+          error.response?.message || t("invite.transfer.failure");
       } finally {
         transferLoading.value = false;
       }
     };
-    
+
     const toggleWithdrawCard = () => {
       if (showTransferCardState.value) {
-        pendingCardAction.value = 'withdraw';
+        pendingCardAction.value = "withdraw";
         showTransferCardState.value = false;
       } else {
         showWithdrawCard.value = true;
-        withdrawAccount.value = '';
-        withdrawAmount.value = '';
-        withdrawError.value = '';
-        
+        withdrawAccount.value = "";
+        withdrawAmount.value = "";
+        withdrawError.value = "";
+
         if (withdrawMethods.value.length > 0) {
           selectedWithdrawMethod.value = withdrawMethods.value[0];
         } else {
-          selectedWithdrawMethod.value = '';
+          selectedWithdrawMethod.value = "";
         }
       }
     };
-    
+
     const closeWithdrawCard = () => {
       showWithdrawCard.value = false;
-      withdrawError.value = '';
+      withdrawError.value = "";
     };
-    
+
     const toggleMethodDropdown = () => {
       if (withdrawMethods.value.length === 0) return;
       showMethodDropdown.value = !showMethodDropdown.value;
     };
-    
+
     const selectWithdrawMethod = (method) => {
       selectedWithdrawMethod.value = method;
       showMethodDropdown.value = false;
     };
-    
+
     const closeDropdownOnClickOutside = (event) => {
-      const dropdown = document.querySelector('.custom-select');
+      const dropdown = document.querySelector(".custom-select");
       if (dropdown && !dropdown.contains(event.target)) {
         showMethodDropdown.value = false;
       }
     };
-    
+
     const submitWithdraw = async () => {
       if (!withdrawAccount.value || !selectedWithdrawMethod.value) {
-        withdrawError.value = t('validation.required', { field: t('invite.withdraw.account') });
+        withdrawError.value = t("validation.required", {
+          field: t("invite.withdraw.account"),
+        });
         return;
       }
-      
+
       const amount = parseFloat(withdrawAmount.value);
       if (isNaN(amount) || amount <= 0) {
-        withdrawError.value = t('invite.withdraw.invalidAmount');
-        showToast(withdrawError.value, 'error');
+        withdrawError.value = t("invite.withdraw.invalidAmount");
+        showToast(withdrawError.value, "error");
         return;
       }
-      
+
       if (amount > parseFloat(inviteStats.availableCommission)) {
-        withdrawError.value = t('invite.withdraw.insufficientFunds');
-        showToast(withdrawError.value, 'error');
+        withdrawError.value = t("invite.withdraw.insufficientFunds");
+        showToast(withdrawError.value, "error");
         return;
       }
-      
+
       if (amount < minWithdrawAmount.value && minWithdrawAmount.value > 0) {
-        withdrawError.value = t('invite.withdraw.belowMinAmount', { 
-          amount: currencySymbol.value + minWithdrawAmount.value + currency.value 
+        withdrawError.value = t("invite.withdraw.belowMinAmount", {
+          amount:
+            currencySymbol.value + minWithdrawAmount.value + currency.value,
         });
-        showToast(withdrawError.value, 'error');
+        showToast(withdrawError.value, "error");
         return;
       }
-      
+
       withdrawLoading.value = true;
-      
+
       try {
         const amountInCents = Math.round(amount * 100);
-        
+
         const res = await withdrawCommission(
           amountInCents,
           withdrawAccount.value,
           selectedWithdrawMethod.value
         );
-        
+
         if (res.data === true) {
-          withdrawAccount.value = '';
-          withdrawAmount.value = '';
-          withdrawError.value = '';
-          
-          handleSuccess(t('invite.withdraw.success'));
-          
+          withdrawAccount.value = "";
+          withdrawAmount.value = "";
+          withdrawError.value = "";
+
+          handleSuccess(t("invite.withdraw.success"));
+
           await fetchInviteData();
-          
+
           showWithdrawCard.value = false;
         } else {
-          withdrawError.value = res.message || t('invite.withdraw.failure');
-          showToast(withdrawError.value, 'error');
+          withdrawError.value = res.message || t("invite.withdraw.failure");
+          showToast(withdrawError.value, "error");
         }
       } catch (error) {
-        console.error('提现请求错误:', error);
-        if (error.response && error.response.data && error.response.data.message) {
+        console.error("提现请求错误:", error);
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
           withdrawError.value = error.response.data.message;
         } else if (error.message) {
           withdrawError.value = error.message;
         } else {
-          withdrawError.value = t('invite.withdraw.failure');
+          withdrawError.value = t("invite.withdraw.failure");
         }
-        showToast(withdrawError.value, 'error');
+        showToast(withdrawError.value, "error");
       } finally {
         withdrawLoading.value = false;
       }
     };
 
-    const isMobile = ref(false); 
-    
+    const isMobile = ref(false);
+
     const initClientSideState = () => {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         isMobile.value = window.innerWidth <= 768;
       }
     };
-    
+
     const handleResize = () => {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         isMobile.value = window.innerWidth <= 768;
         nextTick(() => {
           displayPageNumbers.value;
         });
       }
     };
-    
+
     onMounted(() => {
       initClientSideState();
-      
-      document.addEventListener('click', closeDropdownOnClickOutside);
-      document.addEventListener('click', closePageSizeDropdownOnClickOutside);
-      
-      if (typeof window !== 'undefined') {
-        window.addEventListener('resize', handleResize);
+
+      document.addEventListener("click", closeDropdownOnClickOutside);
+      document.addEventListener("click", closePageSizeDropdownOnClickOutside);
+
+      if (typeof window !== "undefined") {
+        window.addEventListener("resize", handleResize);
       }
-      
+
       fetchInviteData();
       currentPage.value = 1;
       fetchInviteDetails(1);
       fetchCommConfig();
-      
+
       pageSize.value = INVITE_CONFIG.recordsPerPage || 10;
     });
-    
+
     onUnmounted(() => {
-      document.removeEventListener('click', closeDropdownOnClickOutside);
-      document.removeEventListener('click', closePageSizeDropdownOnClickOutside);
-      window.removeEventListener('resize', handleResize);
+      document.removeEventListener("click", closeDropdownOnClickOutside);
+      document.removeEventListener(
+        "click",
+        closePageSizeDropdownOnClickOutside
+      );
+      window.removeEventListener("resize", handleResize);
     });
-    
-    const withdrawClose = ref(1); 
-    const withdrawMethods = ref([]); 
-    const showWithdrawCard = ref(false); 
-    const withdrawAccount = ref(''); 
-    const withdrawAmount = ref(''); 
-    const selectedWithdrawMethod = ref(''); 
-    const showMethodDropdown = ref(false); 
-    const withdrawError = ref(''); 
-    const withdrawLoading = ref(false); 
-    const minWithdrawAmount = ref(0); 
-    
+
+    const withdrawClose = ref(1);
+    const withdrawMethods = ref([]);
+    const showWithdrawCard = ref(false);
+    const withdrawAccount = ref("");
+    const withdrawAmount = ref("");
+    const selectedWithdrawMethod = ref("");
+    const showMethodDropdown = ref(false);
+    const withdrawError = ref("");
+    const withdrawLoading = ref(false);
+    const minWithdrawAmount = ref(0);
+
     const pendingCardAction = ref(null);
-    
+
     const onTransferCardHidden = () => {
-      if (pendingCardAction.value === 'withdraw') {
+      if (pendingCardAction.value === "withdraw") {
         pendingCardAction.value = null;
         showWithdrawCard.value = true;
         nextTick(() => {
           setTimeout(() => {
-            const withdrawCard = document.querySelector('.withdraw-card');
+            const withdrawCard = document.querySelector(".withdraw-card");
             if (withdrawCard) {
-              withdrawCard.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'center' 
+              withdrawCard.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
               });
             }
           }, 100);
         });
       }
     };
-    
+
     const onWithdrawCardHidden = () => {
-      if (pendingCardAction.value === 'transfer') {
+      if (pendingCardAction.value === "transfer") {
         pendingCardAction.value = null;
         showTransferCardState.value = true;
         nextTick(() => {
           setTimeout(() => {
-            const transferCard = document.querySelector('.transfer-card');
+            const transferCard = document.querySelector(".transfer-card");
             if (transferCard) {
-              transferCard.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'center' 
+              transferCard.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
               });
             }
           }, 100);
         });
       }
     };
-    
+
     const handleSuccess = (message) => {
-      showToast(message, 'success');
+      showToast(message, "success");
     };
-    
+
     const handleError = (error) => {
-      console.error('Error:', error);
-      const message = error.response?.message || t('common.error');
-      showToast(message, 'error');
+      console.error("Error:", error);
+      const message = error.response?.message || t("common.error");
+      showToast(message, "error");
     };
-    
+
     return {
       loading,
       creatingCode,
@@ -1354,22 +1622,22 @@ export default {
       onWithdrawCardHidden,
       handleSuccess,
       handleError,
-      t, 
+      t,
       currentPage,
       pageSize,
       totalRecords,
       paginatedRecords,
       handlePageChange,
       totalPages,
-      displayPageNumbers, 
+      displayPageNumbers,
       pageSizeOptions,
       showPageSizeDropdown,
       togglePageSizeDropdown,
       selectPageSize,
       closePageSizeDropdownOnClickOutside,
-      isMobile 
+      isMobile,
     };
-  }
+  },
 };
 </script>
 
@@ -1378,16 +1646,16 @@ export default {
   padding: 20px;
   display: flex;
   justify-content: center;
-  
+
   .account-inner {
     width: 100%;
     max-width: 1200px;
   }
-  
+
   .welcome-card {
     margin-bottom: 24px;
   }
-  
+
   .dashboard-card {
     background-color: var(--card-bg-color);
     border-radius: 12px;
@@ -1397,46 +1665,46 @@ export default {
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
     position: relative;
-    overflow: visible; 
-    
+    overflow: visible;
+
     &:hover {
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
       border-color: rgba(var(--theme-color-rgb), 0.3);
     }
-    
+
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 15px;
-      
+
       .card-title {
         font-size: 18px;
         font-weight: 600;
         margin: 0;
       }
-      
+
       .card-actions {
         display: flex;
         gap: 10px;
       }
     }
   }
-  
+
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     margin-bottom: 24px;
-    
+
     @media (max-width: 1200px) {
       grid-template-columns: repeat(2, 1fr);
     }
-    
+
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
     }
-    
+
     .stats-card {
       background-color: var(--card-bg-color);
       border-radius: 12px;
@@ -1446,12 +1714,12 @@ export default {
       align-items: center;
       border: 1px solid var(--border-color);
       transition: all 0.3s ease;
-      
+
       &:hover {
         border-color: rgba(var(--theme-color-rgb), 0.3);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
       }
-      
+
       .stats-icon {
         display: flex;
         align-items: center;
@@ -1463,17 +1731,17 @@ export default {
         margin-right: 15px;
         color: var(--theme-color);
       }
-      
+
       .stats-info {
         flex: 1;
-        
+
         .stats-value {
           font-size: 18px;
           font-weight: 600;
           color: var(--text-color);
           margin-bottom: 5px;
         }
-        
+
         .stats-label {
           font-size: 14px;
           color: var(--secondary-text-color);
@@ -1481,11 +1749,11 @@ export default {
       }
     }
   }
-  
+
   .invite-codes-wrapper {
     margin-bottom: 25px;
   }
-  
+
   .invite-cards-container {
     position: relative;
     display: flex;
@@ -1494,7 +1762,7 @@ export default {
     margin: 30px 0 20px;
     padding: 10px 0;
   }
-  
+
   .invite-cards-nav {
     position: absolute;
     width: 36px;
@@ -1510,22 +1778,22 @@ export default {
     z-index: 5;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    
+
     &:hover {
       background-color: var(--theme-color);
       color: white;
       transform: scale(1.1);
     }
-    
+
     &.prev {
       left: 0;
     }
-    
+
     &.next {
       right: 0;
     }
   }
-  
+
   .invite-cards-wrapper {
     position: relative;
     width: 100%;
@@ -1533,7 +1801,7 @@ export default {
     perspective: 1000px;
     overflow: hidden;
   }
-  
+
   .invite-cards {
     position: relative;
     width: 100%;
@@ -1541,7 +1809,7 @@ export default {
     display: flex;
     justify-content: center;
   }
-  
+
   .invite-card {
     position: absolute;
     width: calc(100% - 40px);
@@ -1551,27 +1819,27 @@ export default {
     backface-visibility: hidden;
     transform: translateX(60%) scale(0.8) rotateY(-10deg);
     pointer-events: none;
-    
+
     &.active {
       opacity: 1;
       transform: translateX(0) scale(1) rotateY(0);
       z-index: 3;
       pointer-events: auto;
     }
-    
+
     &.prev {
       opacity: 0.7;
       transform: translateX(-60%) scale(0.8) rotateY(10deg);
       z-index: 2;
     }
-    
+
     &.next {
       opacity: 0.7;
       transform: translateX(60%) scale(0.8) rotateY(-10deg);
       z-index: 2;
     }
   }
-  
+
   .invite-card-inner {
     width: 100%;
     height: 100%;
@@ -1587,10 +1855,9 @@ export default {
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 2px 10px rgba(var(--theme-color-rgb), 0.15);
-    
-    
+
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
@@ -1603,11 +1870,11 @@ export default {
       );
       pointer-events: none;
     }
-    
+
     .card-shine {
       display: none;
     }
-    
+
     .card-decoration {
       position: absolute;
       bottom: 0;
@@ -1624,16 +1891,16 @@ export default {
       transform: translate(20%, 20%);
       pointer-events: none;
     }
-    
+
     &:hover {
       box-shadow: 0 3px 12px rgba(var(--theme-color-rgb), 0.25);
-      
+
       .card-shine {
         display: none;
       }
     }
   }
-  
+
   .invite-card-header {
     display: flex;
     justify-content: space-between;
@@ -1642,27 +1909,27 @@ export default {
     position: relative;
     z-index: 2;
   }
-  
+
   .invite-card-title {
     display: flex;
     align-items: center;
     font-size: 18px;
     font-weight: 600;
     letter-spacing: 0.3px;
-    
+
     .card-icon {
       margin-right: 8px;
       opacity: 0.9;
     }
   }
-  
+
   .invite-card-body {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
   .invite-code-display {
     font-size: 24px;
     font-weight: 500;
@@ -1674,16 +1941,17 @@ export default {
     justify-content: center;
     position: relative;
     z-index: 2;
-    
-    &::before, &::after {
+
+    &::before,
+    &::after {
       display: none;
     }
-    
+
     .code-char {
       display: inline-block;
       animation: fadeIn 0.4s both;
       animation-delay: calc(var(--i, 0) * 0.04s);
-      
+
       @for $i from 0 through 10 {
         &:nth-child(#{$i + 1}) {
           --i: #{$i};
@@ -1691,7 +1959,7 @@ export default {
       }
     }
   }
-  
+
   .invite-card-footer {
     margin-top: auto;
     padding-top: 15px;
@@ -1700,26 +1968,26 @@ export default {
     align-items: flex-end;
     position: relative;
     z-index: 2;
-    
+
     .card-label {
       font-size: 12px;
       font-weight: 500;
       opacity: 0.8;
       margin-top: 8px;
     }
-    
+
     .invite-card-date {
       font-size: 11px;
       opacity: 0.7;
     }
   }
-  
+
   .invite-cards-indicators {
     display: flex;
     justify-content: center;
     gap: 8px;
     margin-bottom: 20px;
-    
+
     .indicator {
       width: 8px;
       height: 8px;
@@ -1727,29 +1995,29 @@ export default {
       background-color: var(--border-color);
       cursor: pointer;
       transition: all 0.3s ease;
-      
+
       &.active {
         width: 24px;
         border-radius: 4px;
         background-color: var(--theme-color);
       }
-      
+
       &:hover:not(.active) {
         background-color: var(--secondary-text-color);
       }
     }
   }
-  
+
   .invite-link-wrapper {
     display: flex;
     gap: 10px;
     margin-top: 16px;
     margin-bottom: 20px;
-    
+
     .input-with-icon {
       position: relative;
       flex: 1;
-      
+
       .input-icon {
         position: absolute;
         left: 12px;
@@ -1761,46 +2029,46 @@ export default {
         opacity: 0.8;
         pointer-events: none;
       }
-      
+
       .invite-link {
         width: 100%;
         height: 42px;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
         background-color: var(--input-bg-color, rgba(0, 0, 0, 0.03));
         padding: 0 15px 0 40px;
-      color: var(--text-color);
-      font-size: 14px;
+        color: var(--text-color);
+        font-size: 14px;
         transition: all 0.3s ease;
         outline: none;
         box-sizing: border-box;
-        
+
         &:focus {
           border-color: var(--theme-color);
           box-shadow: 0 0 0 2px rgba(var(--theme-color-rgb), 0.15);
         }
-        
+
         &::placeholder {
           color: var(--placeholder-color, #aaa);
         }
-        
+
         &:hover:not(:focus) {
           border-color: rgba(var(--theme-color-rgb), 0.3);
           background-color: var(--input-hover-bg-color, rgba(0, 0, 0, 0.05));
         }
-        
+
         &:read-only {
           cursor: pointer;
         }
       }
     }
   }
-  
+
   .share-buttons {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    
+
     .btn-outline {
       display: inline-flex;
       align-items: center;
@@ -1816,58 +2084,58 @@ export default {
       font-weight: 500;
       cursor: pointer;
       transition: all 0.3s ease;
-      
+
       &:hover {
         border-color: var(--theme-color);
         color: var(--theme-color);
         background-color: rgba(var(--theme-color-rgb), 0.05);
         transform: translateY(-1px);
       }
-      
+
       .btn-icon {
         width: 18px;
         height: 18px;
       }
     }
-    
+
     .wechat-btn:hover {
       border-color: #07c160;
       color: #07c160;
       background-color: rgba(7, 193, 96, 0.05);
     }
-    
+
     .qq-btn:hover {
       border-color: #12b7f5;
       color: #12b7f5;
       background-color: rgba(18, 183, 245, 0.05);
     }
-    
+
     .twitter-btn:hover {
       border-color: #1da1f2;
       color: #1da1f2;
       background-color: rgba(29, 161, 242, 0.05);
     }
-    
+
     .telegram-btn:hover {
       border-color: #0088cc;
       color: #0088cc;
       background-color: rgba(0, 136, 204, 0.05);
     }
   }
-  
+
   .rules-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 20px;
-    
+
     @media (min-width: 768px) {
       grid-template-columns: repeat(2, 1fr);
     }
-    
+
     @media (min-width: 992px) {
       grid-template-columns: repeat(4, 1fr);
     }
-    
+
     .rule-item {
       display: flex;
       align-items: flex-start;
@@ -1876,11 +2144,11 @@ export default {
       border-radius: 10px;
       background-color: rgba(var(--border-color-rgb), 0.05);
       transition: all 0.3s ease;
-      
+
       &:hover {
         background-color: rgba(var(--theme-color-rgb), 0.05);
       }
-      
+
       .rule-icon {
         display: flex;
         align-items: center;
@@ -1891,17 +2159,17 @@ export default {
         background-color: rgba(var(--theme-color-rgb), 0.1);
         color: var(--theme-color);
       }
-      
+
       .rule-content {
         flex: 1;
-        
+
         h3 {
           font-size: 16px;
           font-weight: 600;
           margin: 0 0 5px;
           color: var(--text-color);
         }
-        
+
         p {
           font-size: 14px;
           color: var(--secondary-text-color);
@@ -1910,7 +2178,7 @@ export default {
       }
     }
   }
-  
+
   .records-table-wrapper {
     width: 100%;
     overflow-x: auto;
@@ -1918,21 +2186,22 @@ export default {
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     background-color: var(--card-bg-color);
-    
+
     .records-table {
       width: 100%;
       border-collapse: collapse;
-      
-      th, td {
+
+      th,
+      td {
         padding: 15px 20px;
         text-align: left;
         border-bottom: 1px solid var(--border-light-color);
-        white-space: nowrap; 
+        white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis; 
-        max-width: 200px; 
+        text-overflow: ellipsis;
+        max-width: 200px;
       }
-      
+
       th {
         font-weight: 600;
         color: var(--text-color);
@@ -1944,37 +2213,36 @@ export default {
         text-transform: capitalize;
         border-bottom: 2px solid var(--border-color);
       }
-      
+
       td {
         font-size: 14px;
         color: var(--text-color);
         transition: all 0.2s ease;
       }
-      
+
       tbody tr {
         transition: background-color 0.3s;
-        
+
         &:hover {
           background-color: rgba(var(--theme-color-rgb), 0.05);
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
-        
+
         &:last-child td {
           border-bottom: none;
         }
       }
-      
-      
-      td:nth-child(2), td:nth-child(3) {
+
+      td:nth-child(2),
+      td:nth-child(3) {
         font-weight: 600;
         font-size: 15px;
       }
-      
-      
+
       td:nth-child(3) {
         color: var(--theme-color);
       }
-      
+
       .status-badge {
         display: inline-flex;
         align-items: center;
@@ -1985,25 +2253,25 @@ export default {
         font-weight: 500;
         min-width: 80px;
         text-align: center;
-        
+
         &.confirmed {
           background-color: rgba(76, 175, 80, 0.1);
           color: #4caf50;
           border: 1px solid rgba(76, 175, 80, 0.2);
         }
-        
+
         &.pending {
           background-color: rgba(255, 152, 0, 0.1);
           color: #ff9800;
           border: 1px solid rgba(255, 152, 0, 0.2);
         }
-        
+
         &.waiting {
           background-color: rgba(33, 150, 243, 0.1);
           color: #2196f3;
           border: 1px solid rgba(33, 150, 243, 0.2);
         }
-        
+
         &.invalid {
           background-color: rgba(244, 67, 54, 0.1);
           color: #f44336;
@@ -2011,20 +2279,21 @@ export default {
         }
       }
     }
-    
-    
+
     @media (max-width: 768px) {
       .records-table {
-        th, td {
+        th,
+        td {
           padding: 12px 15px;
           font-size: 13px;
         }
-        
-        td:nth-child(2), td:nth-child(3) {
+
+        td:nth-child(2),
+        td:nth-child(3) {
           font-size: 14px;
           font-weight: 600;
         }
-        
+
         .status-badge {
           padding: 4px 8px;
           font-size: 12px;
@@ -2032,7 +2301,7 @@ export default {
         }
       }
     }
-    
+
     .empty-records {
       padding: 40px 20px;
       text-align: center;
@@ -2041,9 +2310,9 @@ export default {
       border-radius: 8px;
       border: 1px dashed var(--border-color);
       font-size: 15px;
-      
+
       &::before {
-        content: '📋';
+        content: "📋";
         display: block;
         font-size: 32px;
         margin-bottom: 15px;
@@ -2051,15 +2320,15 @@ export default {
       }
     }
   }
-  
+
   .no-invite-code {
     padding: 30px;
     text-align: center;
     color: var(--secondary-text-color);
-    
+
     .create-code-btn {
       margin-top: 16px;
-      
+
       .create-btn-content {
         display: inline-flex;
         align-items: center;
@@ -2069,8 +2338,9 @@ export default {
   }
 }
 
-
-.btn-primary, .btn-outline, .btn-action {
+.btn-primary,
+.btn-outline,
+.btn-action {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2082,14 +2352,14 @@ export default {
   cursor: pointer;
   transition: all 0.3s ease;
   box-sizing: border-box;
-  
+
   .btn-icon {
     width: 16px;
     height: 16px;
-    display: inline-flex; 
-    vertical-align: middle; 
+    display: inline-flex;
+    vertical-align: middle;
   }
-  
+
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -2107,13 +2377,13 @@ export default {
   font-weight: 500;
   box-shadow: 0 2px 5px rgba(var(--theme-color-rgb), 0.2);
   transition: all 0.3s ease;
-  
+
   &:hover:not(:disabled) {
     background-color: var(--theme-hover-color, #3070e0);
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(var(--theme-color-rgb), 0.3);
   }
-  
+
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -2124,7 +2394,7 @@ export default {
   background-color: transparent;
   color: var(--text-color);
   border: 1px solid var(--border-color);
-  
+
   &:hover:not(:disabled) {
     border-color: var(--theme-color);
     color: var(--theme-color);
@@ -2138,21 +2408,21 @@ export default {
   border: none;
   padding: 5px 10px;
   font-size: 13px;
-  
+
   &:hover:not(:disabled) {
     color: var(--theme-color);
     background-color: rgba(var(--theme-color-rgb), 0.05);
   }
-  
+
   .action-icon {
     width: 16px;
     height: 16px;
   }
-  
+
   .spin {
     animation: spin 1s linear infinite;
   }
-  
+
   @keyframes spin {
     from {
       transform: rotate(0deg);
@@ -2163,14 +2433,13 @@ export default {
   }
 }
 
-
 .skeleton-loading {
   overflow: hidden;
   position: relative;
   border-radius: 5px;
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     right: 0;
@@ -2204,9 +2473,9 @@ export default {
   display: flex !important;
   align-items: center;
   padding: 16px;
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     right: 0;
@@ -2301,7 +2570,6 @@ export default {
   gap: 12px;
 }
 
-
 .dark-theme .skeleton-header-cell,
 .dark-theme .skeleton-cell,
 .dark-theme .skeleton-icon,
@@ -2311,34 +2579,33 @@ export default {
   background-color: rgba(255, 255, 255, 0.08);
 }
 
-
 @media (max-width: 768px) {
   .account-container {
     padding: 15px;
-    padding-bottom: 80px; 
-    
+    padding-bottom: 80px;
+
     .stats-grid {
       grid-template-columns: 1fr;
     }
-    
+
     .invite-link-wrapper {
       flex-direction: column;
       margin-bottom: 15px;
-      
+
       .input-with-icon {
         width: 100%;
-      
-      .invite-link {
-        width: 100%;
+
+        .invite-link {
+          width: 100%;
         }
       }
-      
+
       .btn-primary {
         width: 100%;
         margin-top: 10px;
       }
     }
-    
+
     .share-buttons {
       .btn-outline {
         flex: 1;
@@ -2348,24 +2615,22 @@ export default {
   }
 }
 
-
 .dark-theme .invite-code-tabs,
 .dark .invite-code-tabs {
   background-color: rgba(255, 255, 255, 0.05);
-  
+
   .invite-code-tab {
     background-color: rgba(30, 30, 30, 0.7);
-    
+
     &.active {
       background-color: var(--card-bg-color);
     }
-    
+
     &:hover:not(.active) {
       background-color: rgba(40, 40, 40, 0.9);
     }
   }
 }
-
 
 @media (max-width: 768px) {
   .invite-code-tabs {
@@ -2373,33 +2638,33 @@ export default {
     gap: 8px;
     justify-content: flex-start;
   }
-  
+
   .invite-code-tab {
     flex: 0 0 calc(50% - 8px);
     min-width: calc(50% - 8px);
     padding: 8px 12px;
-    
+
     .tab-code {
       font-size: 0.9rem;
     }
-    
+
     .tab-visits {
       font-size: 0.75rem;
     }
   }
-  
+
   .share-buttons {
     gap: 8px;
     flex-wrap: wrap;
     justify-content: space-between;
-    
+
     .btn-outline {
       flex: 0 0 calc(50% - 4px);
       min-width: calc(50% - 4px);
       margin: 0 0 8px 0;
       padding: 8px 5px;
       font-size: 0.9rem;
-      
+
       .btn-icon {
         width: 16px;
         height: 16px;
@@ -2407,7 +2672,6 @@ export default {
     }
   }
 }
-
 
 .loading-icon {
   display: inline-block;
@@ -2433,123 +2697,122 @@ export default {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-
 
 .card-actions .btn-action .loading-icon {
   border: 2px solid rgba(var(--theme-color-rgb), 0.3);
   border-top-color: var(--theme-color);
 }
 
-
-.dark-theme, .dark {
+.dark-theme,
+.dark {
   .invite-link-wrapper .input-with-icon .invite-link {
     background-color: var(--input-bg-color, rgba(255, 255, 255, 0.08));
     border-color: var(--border-color, rgba(255, 255, 255, 0.12));
-    
+
     &:hover:not(:focus) {
       background-color: var(--input-hover-bg-color, rgba(255, 255, 255, 0.12));
       border-color: rgba(var(--theme-color-rgb), 0.4);
     }
-    
+
     &::placeholder {
       color: var(--placeholder-color, rgba(255, 255, 255, 0.4));
     }
   }
-  
+
   .btn-primary {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    
+
     &:hover:not(:disabled) {
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     }
   }
-  
+
   .share-buttons .btn-outline {
     border-color: var(--border-color, rgba(255, 255, 255, 0.15));
-    
+
     &:hover {
       background-color: rgba(var(--theme-color-rgb), 0.15);
     }
   }
-  
+
   .loading-icon {
     border-color: rgba(255, 255, 255, 0.2);
-    
+
     &.dark-loader {
       border-color: rgba(0, 0, 0, 0.2);
       border-top-color: var(--theme-color);
     }
   }
-  
-  
+
   .transfer-card {
     background-color: var(--card-bg-color);
     border-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    
+
     .alert.alert-warning {
       background-color: rgba(255, 152, 0, 0.1);
       border-color: rgba(255, 152, 0, 0.25);
-      
+
       .alert-icon {
         color: #ff9800;
         filter: drop-shadow(0 1px 3px rgba(255, 152, 0, 0.3));
       }
-      
+
       .alert-desc {
         color: #ff9800;
       }
     }
-    
+
     .input-with-prefix {
       .input-prefix {
         background-color: rgba(255, 255, 255, 0.05);
         border-color: rgba(255, 255, 255, 0.1);
       }
-      
+
       .form-control {
         background-color: rgba(255, 255, 255, 0.05);
         border-color: rgba(255, 255, 255, 0.1);
         color: var(--text-color);
-        
+
         &:hover:not(:focus) {
           background-color: rgba(255, 255, 255, 0.08);
         }
-        
+
         &:focus {
           background-color: rgba(255, 255, 255, 0.1);
         }
       }
     }
-    
+
     .form-hint::before {
       opacity: 0.8;
     }
   }
-  
-  
+
   .balance-card {
     &:hover {
       border-color: rgba(var(--theme-color-rgb), 0.3);
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
-    
+
     .balance-value::before {
       opacity: 0.8;
     }
   }
-  
-  
+
   .modal-container {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     background-color: var(--card-bg-color);
     border-color: rgba(255, 255, 255, 0.1);
   }
 }
-
 
 .custom-modal {
   position: fixed;
@@ -2610,12 +2873,16 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to right, rgba(var(--theme-color-rgb), 0.05), transparent);
+  background: linear-gradient(
+    to right,
+    rgba(var(--theme-color-rgb), 0.05),
+    transparent
+  );
   position: sticky;
   top: 0;
   z-index: 5;
   background-color: var(--card-background);
-  
+
   h3 {
     margin: 0;
     font-size: 20px;
@@ -2624,9 +2891,9 @@ export default {
     display: flex;
     align-items: center;
     gap: 10px;
-    
+
     &::before {
-      content: '';
+      content: "";
       display: block;
       width: 4px;
       height: 18px;
@@ -2634,7 +2901,7 @@ export default {
       border-radius: 2px;
     }
   }
-  
+
   .modal-close {
     background: none;
     border: none;
@@ -2648,13 +2915,13 @@ export default {
     transition: all 0.3s ease;
     margin: -8px;
     z-index: 10;
-    
+
     &:hover {
       background-color: rgba(0, 0, 0, 0.05);
       color: var(--text-color);
       transform: rotate(90deg);
     }
-    
+
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
@@ -2667,14 +2934,14 @@ export default {
   overflow-y: auto;
   flex: 1;
   max-height: calc(90vh - 140px);
-  
+
   p {
     color: var(--text-color);
     font-size: 15px;
     line-height: 1.6;
     margin: 0 0 16px;
   }
-  
+
   .alert {
     display: flex;
     align-items: center;
@@ -2683,16 +2950,16 @@ export default {
     padding: 16px;
     position: relative;
     overflow: hidden;
-    
+
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
       width: 4px;
       height: 100%;
     }
-    
+
     .alert-icon {
       flex-shrink: 0;
       margin-right: 14px;
@@ -2700,31 +2967,31 @@ export default {
       align-items: center;
       justify-content: center;
     }
-    
+
     .alert-content {
       flex: 1;
     }
-    
+
     &.alert-warning {
       background-color: rgba(255, 152, 0, 0.08);
       border: 1px solid rgba(255, 152, 0, 0.2);
-      
+
       &::before {
         background-color: #ff9800;
       }
-      
+
       .alert-icon {
         color: #ff9800;
         filter: drop-shadow(0 2px 4px rgba(255, 152, 0, 0.3));
       }
-      
+
       .alert-title {
         font-weight: 600;
         margin-bottom: 4px;
         color: #ff9800;
         font-size: 15px;
       }
-      
+
       .alert-desc {
         color: var(--text-color);
         opacity: 0.9;
@@ -2733,30 +3000,31 @@ export default {
       }
     }
   }
-  
+
   .form-group {
     margin-bottom: 20px;
-    
+
     .form-label {
       display: block;
       margin-bottom: 8px;
       font-weight: 500;
       color: var(--text-color);
     }
-    
-    .input-with-prefix, .account-input {
+
+    .input-with-prefix,
+    .account-input {
       display: flex;
       border: 1px solid var(--border-color);
       border-radius: 10px;
       overflow: hidden;
       transition: all 0.3s ease;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      
+
       &:focus-within {
         border-color: var(--theme-color);
         box-shadow: 0 0 0 3px rgba(var(--theme-color-rgb), 0.15);
       }
-      
+
       .input-prefix {
         display: flex;
         align-items: center;
@@ -2767,7 +3035,7 @@ export default {
         font-weight: 500;
         border-right: 1px solid var(--border-color);
       }
-      
+
       .form-control {
         flex: 1;
         padding: 12px 16px;
@@ -2776,26 +3044,26 @@ export default {
         color: var(--text-color);
         font-size: 16px;
         outline: none;
-        
+
         &::placeholder {
           color: var(--text-muted);
           opacity: 0.7;
         }
       }
     }
-    
+
     .form-hint {
       margin-top: 8px;
       font-size: 13px;
       color: var(--text-muted);
-      
+
       .min-withdraw-hint {
         color: var(--warning-color);
         margin-left: 4px;
         font-weight: 500;
       }
     }
-    
+
     .error-message {
       margin-top: 8px;
       color: #f44336;
@@ -2803,9 +3071,9 @@ export default {
       display: flex;
       align-items: center;
       gap: 4px;
-      
+
       &::before {
-        content: '!';
+        content: "!";
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -2826,7 +3094,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  
+
   button {
     padding: 12px 24px;
     border-radius: 10px;
@@ -2834,18 +3102,18 @@ export default {
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-    
+
     &.btn-cancel {
       background-color: transparent;
       border: 1px solid var(--border-color);
       color: var(--text-color);
-      
+
       &:hover {
         background-color: rgba(0, 0, 0, 0.05);
         transform: translateY(-2px);
       }
     }
-    
+
     &.btn-submit {
       background-color: var(--theme-color);
       border: none;
@@ -2856,19 +3124,19 @@ export default {
       gap: 8px;
       min-width: 100px;
       box-shadow: 0 4px 10px rgba(var(--theme-color-rgb), 0.3);
-      
+
       &:hover:not(:disabled) {
         background-color: rgba(var(--theme-color-rgb), 0.9);
         transform: translateY(-2px);
         box-shadow: 0 6px 15px rgba(var(--theme-color-rgb), 0.4);
       }
-      
+
       &:disabled {
         opacity: 0.7;
         cursor: not-allowed;
         box-shadow: none;
       }
-      
+
       .loader {
         width: 18px;
         height: 18px;
@@ -2891,14 +3159,13 @@ export default {
   opacity: 0;
 }
 
-
 .withdraw-methods {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
   width: 100%;
-  
+
   .withdraw-method {
     padding: 12px 20px;
     border-radius: 10px;
@@ -2914,13 +3181,13 @@ export default {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    
+
     &:hover {
       background-color: rgba(var(--theme-color-rgb), 0.08);
       transform: translateY(-2px);
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     }
-    
+
     &.active {
       background-color: transparent;
       color: var(--theme-color);
@@ -2931,13 +3198,11 @@ export default {
   }
 }
 
-
 @media (max-width: 768px) {
   .modal-container {
     width: 95%;
   }
 }
-
 
 .invite-cards-container {
   position: relative;
@@ -2963,17 +3228,17 @@ export default {
   z-index: 5;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  
+
   &:hover {
     background-color: var(--theme-color);
     color: white;
     transform: scale(1.1);
   }
-  
+
   &.prev {
     left: 0;
   }
-  
+
   &.next {
     right: 0;
   }
@@ -3004,20 +3269,20 @@ export default {
   backface-visibility: hidden;
   transform: translateX(60%) scale(0.8) rotateY(-10deg);
   pointer-events: none;
-  
+
   &.active {
     opacity: 1;
     transform: translateX(0) scale(1) rotateY(0);
     z-index: 3;
     pointer-events: auto;
   }
-  
+
   &.prev {
     opacity: 0.7;
     transform: translateX(-60%) scale(0.8) rotateY(10deg);
     z-index: 2;
   }
-  
+
   &.next {
     opacity: 0.7;
     transform: translateX(60%) scale(0.8) rotateY(-10deg);
@@ -3040,10 +3305,9 @@ export default {
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 2px 10px rgba(var(--theme-color-rgb), 0.15);
-  
-  
+
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -3056,11 +3320,11 @@ export default {
     );
     pointer-events: none;
   }
-  
+
   .card-shine {
     display: none;
   }
-  
+
   .card-decoration {
     position: absolute;
     bottom: 0;
@@ -3077,10 +3341,10 @@ export default {
     transform: translate(20%, 20%);
     pointer-events: none;
   }
-  
+
   &:hover {
     box-shadow: 0 3px 12px rgba(var(--theme-color-rgb), 0.25);
-    
+
     .card-shine {
       display: none;
     }
@@ -3102,7 +3366,7 @@ export default {
   font-size: 18px;
   font-weight: 600;
   letter-spacing: 0.3px;
-  
+
   .card-icon {
     margin-right: 8px;
     opacity: 0.9;
@@ -3127,16 +3391,17 @@ export default {
   justify-content: center;
   position: relative;
   z-index: 2;
-  
-  &::before, &::after {
+
+  &::before,
+  &::after {
     display: none;
   }
-  
+
   .code-char {
     display: inline-block;
     animation: fadeIn 0.4s both;
     animation-delay: calc(var(--i, 0) * 0.04s);
-    
+
     @for $i from 0 through 10 {
       &:nth-child(#{$i + 1}) {
         --i: #{$i};
@@ -3153,20 +3418,19 @@ export default {
   align-items: flex-end;
   position: relative;
   z-index: 2;
-  
+
   .card-label {
     font-size: 12px;
     font-weight: 500;
     opacity: 0.8;
     margin-top: 8px;
   }
-  
+
   .invite-card-date {
     font-size: 11px;
     opacity: 0.7;
   }
 }
-
 
 .invite-card-enter-active,
 .invite-card-leave-active {
@@ -3184,25 +3448,24 @@ export default {
 }
 
 @keyframes fadeIn {
-  from { 
+  from {
     opacity: 0;
     transform: translateY(4px);
   }
-  to { 
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-
 .modal-enter-active,
 .modal-leave-active {
   transition: all 0.3s ease;
-  
+
   .modal-container {
     transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   }
-  
+
   .modal-overlay {
     transition: opacity 0.3s ease;
   }
@@ -3211,12 +3474,12 @@ export default {
 .modal-enter-from,
 .modal-leave-to {
   opacity: 0;
-  
+
   .modal-container {
     opacity: 0;
     transform: scale(0.95) translateY(20px);
   }
-  
+
   .modal-overlay {
     opacity: 0;
   }
@@ -3225,24 +3488,23 @@ export default {
 .modal-enter-to,
 .modal-leave-from {
   opacity: 1;
-  
+
   .modal-container {
     opacity: 1;
     transform: scale(1) translateY(0);
   }
-  
+
   .modal-overlay {
     opacity: 1;
   }
 }
-
 
 .invite-cards-indicators {
   display: flex;
   justify-content: center;
   gap: 8px;
   margin-bottom: 20px;
-  
+
   .indicator {
     width: 8px;
     height: 8px;
@@ -3250,90 +3512,88 @@ export default {
     background-color: var(--border-color);
     cursor: pointer;
     transition: all 0.3s ease;
-    
+
     &.active {
       width: 24px;
       border-radius: 4px;
       background-color: var(--theme-color);
     }
-    
+
     &:hover:not(.active) {
       background-color: var(--secondary-text-color);
     }
   }
 }
 
-
-.dark-theme, .dark {
+.dark-theme,
+.dark {
   .invite-cards-nav {
     background-color: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.1);
-    
+
     &:hover {
       background-color: var(--theme-color);
     }
   }
-  
+
   .invite-cards-indicators .indicator {
     background-color: rgba(255, 255, 255, 0.2);
-    
+
     &:hover:not(.active) {
       background-color: rgba(255, 255, 255, 0.4);
     }
   }
 }
 
-
 @media (max-width: 768px) {
   .invite-cards {
     height: 170px;
   }
-  
+
   .invite-cards-nav {
     width: 32px;
     height: 32px;
-    
+
     &.prev {
       left: -5px;
     }
-    
+
     &.next {
       right: -5px;
     }
   }
-  
+
   .invite-card {
     width: calc(100% - 20px);
   }
-  
+
   .invite-card-inner {
     padding: 15px;
   }
-  
+
   .invite-card-title {
     font-size: 16px;
   }
-  
+
   .invite-code-display {
     font-size: 18px;
     padding: 8px 12px;
   }
-  
+
   .invite-card-footer {
     padding-top: 10px;
     flex-direction: column;
     align-items: flex-start;
-    
+
     .invite-card-date {
       margin-top: 5px;
     }
   }
 }
 
-
 .balance-card {
   transition: all 0.3s ease;
-  
+
   &:hover {
     transform: none;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
@@ -3346,12 +3606,12 @@ export default {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  
+
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .balance-info {
     .balance-label {
       font-size: 14px;
@@ -3359,7 +3619,7 @@ export default {
       margin-bottom: 6px;
       font-weight: 500;
     }
-    
+
     .balance-value {
       font-size: 32px;
       font-weight: 600;
@@ -3369,7 +3629,7 @@ export default {
       display: flex;
       align-items: baseline;
     }
-    
+
     .balance-description {
       font-size: 13px;
       color: var(--secondary-text-color);
@@ -3377,11 +3637,11 @@ export default {
       line-height: 1.5;
     }
   }
-  
+
   .balance-actions {
     display: flex;
     gap: 10px;
-    
+
     .btn-primary {
       height: 44px;
       font-weight: 600;
@@ -3390,17 +3650,17 @@ export default {
       border-radius: 10px;
       min-width: 140px;
       box-shadow: 0 2px 8px rgba(var(--theme-color-rgb), 0.25);
-      
+
       &:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(var(--theme-color-rgb), 0.35);
       }
     }
-    
+
     @media (max-width: 768px) {
       width: 100%;
       margin-top: 10px;
-      
+
       .btn-primary {
         width: 100%;
         justify-content: center;
@@ -3408,7 +3668,6 @@ export default {
     }
   }
 }
-
 
 .transfer-card {
   margin-bottom: 24px;
@@ -3419,20 +3678,20 @@ export default {
   border-radius: 12px;
   background-color: var(--card-bg-color);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  
+
   .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
     border-bottom: 1px solid var(--border-color);
-    
+
     .card-title {
       font-size: 16px;
       font-weight: 600;
       margin: 0;
     }
-    
+
     .close-btn {
       background: transparent;
       border: none;
@@ -3445,18 +3704,18 @@ export default {
       align-items: center;
       justify-content: center;
       transition: all 0.2s ease;
-      
+
       &:hover {
         background-color: rgba(var(--theme-color-rgb), 0.1);
         color: var(--theme-color);
       }
     }
   }
-  
+
   .card-body {
     padding: 20px;
   }
-  
+
   .alert {
     display: flex;
     align-items: center;
@@ -3465,16 +3724,16 @@ export default {
     padding: 16px;
     position: relative;
     overflow: hidden;
-    
+
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
       width: 4px;
       height: 100%;
     }
-    
+
     .alert-icon {
       flex-shrink: 0;
       margin-right: 14px;
@@ -3482,31 +3741,31 @@ export default {
       align-items: center;
       justify-content: center;
     }
-    
+
     .alert-content {
       flex: 1;
     }
-    
+
     &.alert-warning {
       background-color: rgba(255, 152, 0, 0.08);
       border: 1px solid rgba(255, 152, 0, 0.2);
-      
+
       &::before {
         background-color: #ff9800;
       }
-      
+
       .alert-icon {
         color: #ff9800;
         filter: drop-shadow(0 2px 4px rgba(255, 152, 0, 0.3));
       }
-      
+
       .alert-title {
         font-weight: 600;
         margin-bottom: 4px;
         color: #ff9800;
         font-size: 15px;
       }
-      
+
       .alert-desc {
         color: var(--text-color);
         opacity: 0.9;
@@ -3515,11 +3774,11 @@ export default {
       }
     }
   }
-  
+
   .transfer-form {
     .form-group {
       margin-bottom: 16px;
-      
+
       .form-label {
         display: block;
         font-size: 14px;
@@ -3527,7 +3786,7 @@ export default {
         color: var(--text-color);
         font-weight: 500;
       }
-      
+
       .input-with-prefix {
         display: flex;
         align-items: stretch;
@@ -3535,7 +3794,7 @@ export default {
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         border-radius: 8px;
         overflow: hidden;
-        
+
         .input-prefix {
           display: flex;
           align-items: center;
@@ -3549,7 +3808,7 @@ export default {
           font-weight: 500;
           min-width: 36px;
         }
-        
+
         .form-control {
           flex: 1;
           height: 42px;
@@ -3562,36 +3821,36 @@ export default {
           transition: all 0.3s ease;
           outline: none;
           font-weight: 500;
-          
+
           &:focus {
             border-color: var(--theme-color);
             box-shadow: 0 0 0 2px rgba(var(--theme-color-rgb), 0.15);
           }
-          
+
           &::placeholder {
             color: var(--placeholder-color, #aaa);
             font-weight: normal;
           }
-          
+
           &:hover:not(:focus) {
             border-color: rgba(var(--theme-color-rgb), 0.3);
             background-color: var(--input-hover-bg-color, rgba(0, 0, 0, 0.05));
           }
-          
+
           &:disabled {
             opacity: 0.6;
             cursor: not-allowed;
           }
         }
       }
-      
+
       .form-hint {
         margin-top: 8px;
         font-size: 12px;
         color: var(--secondary-text-color);
         display: flex;
         align-items: center;
-        
+
         &::before {
           content: "";
           margin-right: 0;
@@ -3599,14 +3858,14 @@ export default {
           display: none;
         }
       }
-      
+
       .error-message {
         margin-top: 8px;
         font-size: 12px;
         color: var(--error-color, #f44336);
         display: flex;
         align-items: center;
-        
+
         &::before {
           content: "";
           margin-right: 0;
@@ -3615,7 +3874,7 @@ export default {
         }
       }
     }
-    
+
     .btn-block {
       width: 100%;
       margin-top: 10px;
@@ -3625,23 +3884,22 @@ export default {
       letter-spacing: 0.3px;
       transition: all 0.25s ease;
       border-radius: 8px;
-      
+
       &:not(:disabled):hover {
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(var(--theme-color-rgb), 0.3);
       }
-      
+
       &:not(:disabled):active {
         transform: translateY(0);
       }
-      
+
       &:disabled {
         opacity: 0.65;
       }
     }
   }
 }
-
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
@@ -3655,7 +3913,6 @@ export default {
   opacity: 0;
   transform: translateY(-10px);
 }
-
 
 .custom-select {
   position: relative;
@@ -3685,83 +3942,81 @@ export default {
   text-overflow: ellipsis;
 }
 
-  .select-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--secondary-text-color);
-    transition: transform 0.3s ease;
-    margin-left: 4px;
-  }
-  
-  .select-icon svg {
-    width: 16px;
-    height: 16px;
-    transition: transform 0.3s ease;
-  }
-  
-  .select-icon .rotate-180 {
-    transform: rotate(180deg);
-  }
+.select-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-text-color);
+  transition: transform 0.3s ease;
+  margin-left: 4px;
+}
 
-  .select-dropdown {
-    position: absolute;
-    bottom: calc(100% + 5px); 
-    left: 0;
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    background-color: var(--card-bg-color, #1e1e1e);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    z-index: 3001; 
-    padding: 5px 0;
-  }
-  
-  
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-  
-  .fade-enter-from,
-  .fade-leave-to {
-    opacity: 0;
-    transform: translateY(5px); 
-  }
+.select-icon svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
 
-  .select-option {
-    padding: 8px 15px;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--text-color);
-    transition: all 0.2s ease;
-    text-align: center;
-  }
-  
-  .select-option:hover, .select-option.selected {
-    background-color: rgba(var(--theme-color-rgb), 0.1);
-    color: var(--theme-color);
-  }
+.select-icon .rotate-180 {
+  transform: rotate(180deg);
+}
 
+.select-dropdown {
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: var(--card-bg-color, #1e1e1e);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 3001;
+  padding: 5px 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+.select-option {
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.select-option:hover,
+.select-option.selected {
+  background-color: rgba(var(--theme-color-rgb), 0.1);
+  color: var(--theme-color);
+}
 
 .withdraw-btn {
   background: transparent !important;
   border: 1.5px solid var(--theme-color) !important;
   color: var(--theme-color) !important;
   transition: all 0.3s ease !important;
-  
+
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   .btn-icon {
     color: var(--theme-color);
   }
 }
-
 
 .withdraw-methods {
   display: flex;
@@ -3779,13 +4034,13 @@ export default {
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 14px;
-  
+
   &:hover {
     border-color: var(--theme-color);
     color: var(--theme-color);
     background-color: rgba(var(--theme-color-rgb), 0.05);
   }
-  
+
   &.active {
     background-color: var(--theme-color);
     color: white;
@@ -3793,11 +4048,11 @@ export default {
   }
 }
 
-
-.dark-theme, .dark {
+.dark-theme,
+.dark {
   .method-tag {
     border-color: rgba(255, 255, 255, 0.1);
-    
+
     &:hover {
       border-color: var(--theme-color);
       background-color: rgba(var(--theme-color-rgb), 0.15);
@@ -3814,12 +4069,12 @@ export default {
   overflow: hidden;
   transition: all 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  
+
   &:focus-within {
     border-color: var(--theme-color);
     box-shadow: 0 0 0 3px rgba(var(--theme-color-rgb), 0.15);
   }
-  
+
   .input-prefix {
     display: flex;
     align-items: center;
@@ -3830,7 +4085,7 @@ export default {
     font-weight: 500;
     border-right: 1px solid var(--border-color);
   }
-  
+
   .form-control {
     flex: 1;
     padding: 12px 16px;
@@ -3839,14 +4094,13 @@ export default {
     color: var(--text-color);
     font-size: 16px;
     outline: none;
-    
+
     &::placeholder {
       color: var(--text-muted);
       opacity: 0.7;
     }
   }
 }
-
 
 .pagination-controls {
   display: flex;
@@ -3855,21 +4109,21 @@ export default {
   margin-top: 20px;
   padding: 10px 0;
   gap: 6px;
-  
+
   .page-size-container {
     margin-left: 15px;
     display: flex;
     align-items: center;
   }
-  
+
   .page-size-selector {
     width: 70px;
     height: 36px;
     position: relative;
-    z-index: 3000; 
+    z-index: 3000;
     display: inline-flex;
   }
-  
+
   .page-btn {
     display: flex;
     align-items: center;
@@ -3883,13 +4137,13 @@ export default {
     font-size: 14px;
     cursor: pointer;
     transition: all 0.2s ease;
-    
+
     &:hover:not(:disabled) {
       border-color: var(--theme-color);
       color: var(--theme-color);
       background-color: rgba(var(--theme-color-rgb), 0.05);
     }
-    
+
     &.active {
       color: var(--theme-color);
       border-color: var(--theme-color);
@@ -3897,19 +4151,19 @@ export default {
       box-shadow: 0 2px 6px rgba(var(--theme-color-rgb), 0.2);
       background-color: rgba(var(--theme-color-rgb), 0.05);
     }
-    
+
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
   }
-  
+
   .page-numbers {
     display: flex;
     align-items: center;
     gap: 6px;
   }
-  
+
   .page-ellipsis {
     width: 24px;
     display: flex;
@@ -3919,53 +4173,54 @@ export default {
     font-size: 12px;
     user-select: none;
   }
-  
-  .prev-btn, .next-btn {
+
+  .prev-btn,
+  .next-btn {
     background-color: rgba(var(--theme-color-rgb), 0.05);
   }
 }
-
 
 @media (max-width: 768px) {
   .pagination-controls {
     flex-wrap: nowrap;
     justify-content: center;
     gap: 8px;
-    
+
     .page-btn {
       width: 32px;
       height: 32px;
       font-size: 13px;
     }
-    
+
     .page-numbers {
       gap: 4px;
       flex-wrap: wrap;
       justify-content: center;
     }
-    
+
     .page-ellipsis {
       width: 16px;
     }
-    
+
     .page-size-container {
       margin-top: 0;
       margin-left: 8px;
     }
-    
+
     .page-size-selector {
       height: 32px;
       width: 70px;
     }
   }
-  
+
   .records-table-wrapper {
     overflow-x: auto;
-    
+
     .records-table {
-      min-width: 500px; 
-      
-      th, td {
+      min-width: 500px;
+
+      th,
+      td {
         white-space: nowrap;
         padding: 10px 12px;
         font-size: 13px;
@@ -3973,7 +4228,6 @@ export default {
     }
   }
 }
-
 
 .page-size-selector {
   position: relative;
@@ -3986,12 +4240,12 @@ export default {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  
+
   &:hover {
     background-color: var(--input-hover-bg-color, rgba(0, 0, 0, 0.05));
     border-color: rgba(var(--theme-color-rgb), 0.3);
   }
-  
+
   .select-value {
     font-size: 14px;
     color: var(--text-color);
@@ -4000,7 +4254,7 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  
+
   .select-icon {
     display: flex;
     align-items: center;
@@ -4009,20 +4263,20 @@ export default {
     transition: transform 0.3s ease;
     margin-left: 4px;
   }
-  
+
   .select-icon svg {
     width: 16px;
     height: 16px;
     transition: transform 0.3s ease;
   }
-  
+
   .select-icon .rotate-180 {
     transform: rotate(180deg);
   }
-  
+
   .select-dropdown {
     position: absolute;
-    bottom: calc(100% + 5px); 
+    bottom: calc(100% + 5px);
     left: 0;
     width: 100%;
     max-height: 200px;
@@ -4031,20 +4285,19 @@ export default {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    z-index: 3001; 
+    z-index: 3001;
     padding: 5px 0;
   }
-  
-  
+
   .fade-enter-active,
   .fade-leave-active {
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
-  
+
   .fade-enter-from,
   .fade-leave-to {
     opacity: 0;
-    transform: translateY(5px); 
+    transform: translateY(5px);
   }
 
   .select-option {
@@ -4055,8 +4308,9 @@ export default {
     transition: all 0.2s ease;
     text-align: center;
   }
-  
-  .select-option:hover, .select-option.selected {
+
+  .select-option:hover,
+  .select-option.selected {
     background-color: rgba(var(--theme-color-rgb), 0.1);
     color: var(--theme-color);
   }
