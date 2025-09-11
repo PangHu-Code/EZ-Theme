@@ -254,16 +254,16 @@ const loadLocaleMessages = async (isLoggedIn) => {
 
 const i18n = createI18n({
 
-  legacy: false, 
+  legacy: false,
   locale: getStoredLanguage(),
 
   fallbackLocale: 'en-US',
 
-  messages: {}, 
-  silentTranslationWarn: true, 
+  messages: {},
+  silentTranslationWarn: true,
 
-  missingWarn: false, 
-  fallbackWarn: false 
+  missingWarn: false,
+  fallbackWarn: false
 });
 
 
@@ -272,7 +272,7 @@ export const setLanguage = async (lang) => {
 
   if (!supportedLocales.includes(lang)) {
 
-    lang = 'en-US'; 
+    lang = 'en-US';
   }
 
   
@@ -281,11 +281,11 @@ export const setLanguage = async (lang) => {
 
   
 
-  for (const locale of supportedLocales) {
+  /*for (const locale of supportedLocales) {
 
     i18n.global.setLocaleMessage(locale, {});
 
-  }
+  }*/
 
   
 
@@ -297,7 +297,7 @@ export const setLanguage = async (lang) => {
 
     if (messages[locale]) {
 
-      i18n.global.setLocaleMessage(locale, messages[locale]);
+      i18n.global.mergeLocaleMessage(locale, messages[locale]);
 
     }
 
@@ -371,11 +371,11 @@ export const reloadMessages = async () => {
 
   
 
-  for (const locale of supportedLocales) {
+  /*for (const locale of supportedLocales) {
 
     i18n.global.setLocaleMessage(locale, {});
 
-  }
+  }*/
 
   
 
@@ -391,7 +391,7 @@ export const reloadMessages = async () => {
 
     if (messages[locale]) {
 
-      i18n.global.setLocaleMessage(locale, messages[locale]);
+      i18n.global.mergeLocaleMessage(locale, messages[locale]);
 
     }
 
@@ -445,7 +445,7 @@ export const reloadMessages = async () => {
 
       if (messages[locale]) {
 
-        i18n.global.setLocaleMessage(locale, messages[locale]);
+        i18n.global.mergeLocaleMessage(locale, messages[locale]);
 
       }
 
