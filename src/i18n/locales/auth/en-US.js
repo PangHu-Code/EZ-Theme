@@ -129,7 +129,7 @@ export default {
     }
   },
   landing: {
-    mainText: SITE_CONFIG.landingText['en'] || 'Explore the infinite possibilities of the global network',
+    mainText: SITE_CONFIG.landingText['en-US'] || 'Explore the infinite possibilities of the global network',
     scrollText: 'Scroll down to sign in',
     exploreButton: 'Start Exploring'
   },
