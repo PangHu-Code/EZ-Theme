@@ -1554,107 +1554,110 @@ export default {
 
     const importToClient = (clientType) => {
       if (!userPlan.value.subscribeUrl) {
-        showToast(t('dashboard.noSubscription'), 'error', 3000);
+        showToast(t("dashboard.noSubscription"), "error", 3000);
         return;
       }
 
       const subscribeUrl = userPlan.value.subscribeUrl;
-      const siteName = SITE_CONFIG.siteName || '订阅';
+      const siteName = SITE_CONFIG.siteName || "订阅";
 
-      let url = '';
+      let url = "";
       let shouldUseCurrentWindow = true;
 
       try {
         switch (clientType) {
-          case 'shadowrocket':
-            url = `shadowrocket://add/sub://${window.btoa(subscribeUrl + '&flag=shadowrocket').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')}?remark=${encodeURIComponent(siteName)}`;
+          case "shadowrocket":
+            url = `shadowrocket://add/sub://${window
+              .btoa(subscribeUrl)
+              .replace(/\+/g, "-")
+              .replace(/\//g, "_")
+              .replace(/=+$/, "")}?remark=${encodeURIComponent(siteName)}`;
             break;
-          case 'surge':
-            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+
+          case "surge":
+          case "surge-mac":
+            url = `surge:///install-config?url=${encodeURIComponent(
+              subscribeUrl
+            )}&name=${encodeURIComponent(siteName)}`;
             break;
-          case 'surge-mac':
-            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+
+          case "stash":
+          case "stash-mac":
+            url = `stash://install-config?url=${encodeURIComponent(
+              subscribeUrl
+            )}&name=${encodeURIComponent(siteName)}`;
             break;
-          case 'stash':
-            url = `stash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+
+          case "quantumultx":
+          case "quantumultx-mac":
+            url = `quantumult-x:///update-configuration?remote-resource=${encodeURI(
+              JSON.stringify({
+                server_remote: [
+                  `${subscribeUrl}, tag=${encodeURIComponent(siteName)}`,
+                ],
+              })
+            )}`;
             break;
-          case 'stash-mac':
-            url = `stash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+
+          case "loon":
+            url = `loon://import?nodelist=${encodeURIComponent(
+              subscribeUrl
+            )}&name=${encodeURIComponent(siteName)}`;
             break;
-          case 'quantumultx':
-            url = `quantumult-x:///update-configuration?remote-resource=${encodeURI(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${siteName}`]}))}`;
+
+          case "v2rayng":
+            url = `v2rayng://install-sub?url=${encodeURIComponent(
+              subscribeUrl
+            )}#${encodeURIComponent(siteName)}`;
             break;
-          case 'quantumultx-mac':
-            url = `quantumult-x:///update-configuration?remote-resource=${encodeURI(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${siteName}`]}))}`;
+
+          case "clash":
+          case "clash-android":
+          case "clash-meta-android":
+          case "flclash":
+          case "clashverge":
+          case "nekobox":
+          case "nekoray":
+          case "clashx":
+          case "clashx-meta":
+            url = `clash://install-config?url=${encodeURIComponent(
+              subscribeUrl
+            )}&name=${encodeURIComponent(siteName)}`;
             break;
-          case 'loon':
-            url = `loon://import?nodelist=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+
+          case "surfboard":
+            url = `surfboard:///install-config?url=${encodeURIComponent(
+              subscribeUrl
+            )}&name=${encodeURIComponent(siteName)}`;
             break;
-          case 'v2rayng':
-            url = `v2rayng://install-sub?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
+
+          case "singbox-ios":
+          case "singbox-android":
+          case "singbox-windows":
+          case "singbox-macos":
+            url = `sing-box://import-remote-profile?url=${encodeURIComponent(
+              subscribeUrl
+            )}#${encodeURIComponent(siteName)}`;
             break;
-          case 'clash':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+
+          case "hiddify-android":
+          case "hiddify-windows":
+          case "hiddify-macos":
+          case "hiddify-ios":
+            url = `hiddify://import/${encodeURIComponent(
+              subscribeUrl
+            )}#${encodeURIComponent(siteName)}`;
             break;
-          case 'clash-android':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
-          case 'clash-meta-android':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl + '&flag=meta')}&name=${siteName}`;
-            break;
-          case 'surfboard':
-            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
-          case 'flclash':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
-            break;
-          case 'clashverge':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
-            break;
-          case 'nekobox':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
-            break;
-          case 'nekoray':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
-            break;
-          case 'clashx':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
-          case 'clashx-meta':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl + '&flag=meta')}&name=${siteName}`;
-            break;
-          case 'singbox-ios':
-            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
-            break;
-          case 'singbox-android':
-            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
-            break;
-          case 'singbox-windows':
-            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
-            break;
-          case 'singbox-macos':
-            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
-            break;
-          case 'hiddify-android':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
-            break;
-          case 'hiddify-windows':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
-            break;
-          case 'hiddify-macos':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
-            break;
-          case 'hiddify-ios':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
-            break;
+
           default:
-            navigator.clipboard.writeText(subscribeUrl)
-                .then(() => {
-                  showToast(t('dashboard.subscriptionCopied'), 'success', 3000);
-                })
-                .catch(() => {
-                  showToast(t('dashboard.copyFailed'), 'error', 3000);
-                });
+            navigator.clipboard
+              .writeText(subscribeUrl)
+              .then(() => {
+                showToast(t("dashboard.subscriptionCopied"), "success", 3000);
+              })
+              .catch(() => {
+                showToast(t("dashboard.copyFailed"), "error", 3000);
+              });
             return;
         }
 
@@ -1662,11 +1665,11 @@ export default {
           if (shouldUseCurrentWindow) {
             window.location.href = url;
           } else {
-            window.open(url, '_blank');
+            window.open(url, "_blank");
           }
         }
       } catch (error) {
-        console.error('导入客户端失败:', error);
+        console.error("导入客户端失败:", error);
       }
     };
 
