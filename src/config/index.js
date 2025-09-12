@@ -506,6 +506,9 @@ export const config  = {
         // 是否启用流量明细页面 (true=启用, false=禁用)
         enableTrafficLog: true, // 默认启用
 
+        //是否启用流量明表格 (true=启用, false=禁用）
+        showTrafficTable: true, // 默认启用
+
         // 显示多少天的流量记录
         daysToShow: 30, // 默认显示30天
 

@@ -129,7 +129,7 @@ export default {
     }
   },
   landing: {
-    mainText: SITE_CONFIG.landingText['ru'] || 'Исследуйте бесконечные возможности глобальной сети',
+    mainText: SITE_CONFIG.landingText['ru-RU'] || 'Исследуйте бесконечные возможности глобальной сети',
     scrollText: 'Прокрутите вниз для входа',
     exploreButton: 'Начать исследование'
   },

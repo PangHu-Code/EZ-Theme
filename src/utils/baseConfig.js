@@ -315,6 +315,9 @@ const DEFAULT_TRAFFICLOG_CONFIG = {
     // 是否启用流量明细页面 (true=启用, false=禁用)
     enableTrafficLog: true,
 
+    //是否启用流量明表格 (true=启用, false=禁用）
+    showTrafficTable: true,
+
     // 显示多少天的流量记录
     daysToShow: 30,
 

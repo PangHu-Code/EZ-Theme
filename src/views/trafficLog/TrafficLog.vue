@@ -108,7 +108,7 @@
 
       <!-- 流量数据列表 -->
 
-      <div class="dashboard-card">
+      <div v-if="TRAFFICLOG_CONFIG.showTrafficTable" class="dashboard-card">
 
         <div class="card-header">
 

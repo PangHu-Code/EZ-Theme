@@ -1570,91 +1570,57 @@ export default {
             url = `shadowrocket://add/sub://${window.btoa(subscribeUrl + '&flag=shadowrocket').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')}?remark=${encodeURIComponent(siteName)}`;
             break;
           case 'surge':
-            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
           case 'surge-mac':
-            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${encodeURIComponent(siteName)}`;
             break;
           case 'stash':
-            url = `stash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
           case 'stash-mac':
-            url = `stash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+            url = `stash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${encodeURIComponent(siteName)}`;
             break;
           case 'quantumultx':
-            url = `quantumult-x:///update-configuration?remote-resource=${encodeURI(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${siteName}`]}))}`;
-            break;
           case 'quantumultx-mac':
-            url = `quantumult-x:///update-configuration?remote-resource=${encodeURI(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${siteName}`]}))}`;
+            url = `quantumult-x:///update-configuration?remote-resource=${encodeURI(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${encodeURIComponent(siteName)}`,],}))}`;
             break;
           case 'loon':
-            url = `loon://import?nodelist=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+            url = `loon://import?nodelist=${encodeURIComponent(subscribeUrl)}&name=${encodeURIComponent(siteName)}`;
             break;
           case 'v2rayng':
-            url = `v2rayng://install-sub?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
+            url = `v2rayng://install-sub?url=${encodeURIComponent(subscribeUrl)}#${encodeURIComponent(siteName)}`;
             break;
           case 'clash':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
           case 'clash-android':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
           case 'clash-meta-android':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl + '&flag=meta')}&name=${siteName}`;
+          case 'flclash':
+          case 'clashverge':
+          case 'nekobox':
+          case 'nekoray':
+          case 'clashx':
+          case 'clashx-meta':
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${encodeURIComponent(siteName)}`;
             break;
           case 'surfboard':
-            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
-          case 'flclash':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
-            break;
-          case 'clashverge':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
-            break;
-          case 'nekobox':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
-            break;
-          case 'nekoray':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
-            break;
-          case 'clashx':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
-          case 'clashx-meta':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl + '&flag=meta')}&name=${siteName}`;
+            url = `surfboard:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${encodeURIComponent(siteName)}`;
             break;
           case 'singbox-ios':
-            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
-            break;
           case 'singbox-android':
-            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
-            break;
           case 'singbox-windows':
-            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
-            break;
           case 'singbox-macos':
-            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
+            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${encodeURIComponent(siteName)}`;
             break;
           case 'hiddify-android':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
-            break;
           case 'hiddify-windows':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
-            break;
           case 'hiddify-macos':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
-            break;
           case 'hiddify-ios':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
+            url = `hiddify://import/${encodeURIComponent(subscribeUrl)}&flag=sing#${encodeURIComponent(siteName)}`;
             break;
           default:
             navigator.clipboard.writeText(subscribeUrl)
-                .then(() => {
-                  showToast(t('dashboard.subscriptionCopied'), 'success', 3000);
-                })
-                .catch(() => {
-                  showToast(t('dashboard.copyFailed'), 'error', 3000);
-                });
+              .then(() => {
+                showToast(t('dashboard.subscriptionCopied'), 'success', 3000);
+              })
+              .catch(() => {
+                showToast(t('dashboard.copyFailed'), 'error', 3000);
+              });
             return;
         }
 

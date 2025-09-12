@@ -1,5 +1,6 @@
 # 忽略 node_modules 目录
 node_modules/
+package-lock.json
 
 # 忽略打包输出目录
 dist/
