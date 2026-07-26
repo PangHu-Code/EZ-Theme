@@ -1,6 +1,7 @@
 ﻿
 
 import request from './request';
+import { isXboard } from '@/utils/baseConfig';
 
 
 
@@ -41,13 +42,15 @@ export function getIpLocationInfo() {
 
 export function redeemGiftCard(giftcard) {
 
+    const xboard = isXboard();
+
     return request({
 
-        url: '/user/redeemgiftcard',
+        url: xboard ? '/user/gift-card/redeem' : '/user/redeemgiftcard',
 
         method: 'post',
 
-        data: { giftcard }
+        data: xboard ? { code: giftcard } : { giftcard }
 
     });
 
@@ -116,6 +119,24 @@ export function getActiveSession() {
         url: '/user/getActiveSession',
 
         method: 'get'
+
+    });
+
+}
+
+
+
+
+
+export function removeActiveSession(sessionId) {
+
+    return request({
+
+        url: '/user/removeActiveSession',
+
+        method: 'post',
+
+        data: { session_id: sessionId }
 
     });
 

@@ -308,7 +308,7 @@
 
         <!-- 账号设置 -->
 
-        <div class="profile-card">
+        <div v-if="supportsAutoRenewal" class="profile-card">
 
           <div class="card-header">
 
@@ -550,27 +550,42 @@
 
             <div v-else class="device-list">
 
-              <div v-for="(session, index) in activeSessions" :key="index" class="device-item">
+              <div v-for="(session, index) in activeSessions" :key="session.id ?? index" class="device-item">
 
                 <div class="device-icon">
 
-                  <component :is="getDeviceIcon(session.ua)" :size="24" />
+                  <component :is="getDeviceIcon(getSessionUserAgent(session))" :size="24" />
 
                 </div>
 
                 <div class="device-info">
 
-                  <div class="device-name">{{ formatDeviceInfo(session.ua) }}</div>
+                  <div class="device-name">{{ formatSessionName(session) }}</div>
 
                   <div class="device-meta">
 
-                    <span class="device-ip">{{ session.ip || $t('profile.unknownIP') }}</span>
+                    <span v-if="getSessionIp(session)" class="device-ip">{{ getSessionIp(session) }}</span>
 
-                    <span class="device-time">{{ formatTimestamp(session.login_at) }}</span>
+                    <span v-if="getSessionTimestamp(session)" class="device-time">
+                      {{ formatTimestamp(getSessionTimestamp(session)) }}
+                    </span>
 
                   </div>
 
                 </div>
+
+                <button
+                  v-if="session.id !== undefined && session.id !== null"
+                  class="remove-session-btn"
+                  type="button"
+                  :title="$t('profile.removeSession')"
+                  :aria-label="$t('profile.removeSession')"
+                  :disabled="removingSessionId === session.id"
+                  @click="removeSession(session)"
+                >
+                  <span v-if="removingSessionId === session.id" class="loader"></span>
+                  <IconTrash v-else :size="18" />
+                </button>
 
               </div>
 
@@ -882,6 +897,8 @@ import {
 
   getActiveSession,
 
+  removeActiveSession as apiRemoveActiveSession,
+
   getCommConfig,
 
   getTelegramBotInfo,
@@ -913,6 +930,8 @@ import {
   IconDeviceDesktop,
 
   IconBrowser,
+
+  IconTrash,
 
   IconBrandTelegram
 
@@ -964,6 +983,8 @@ const remindTraffic = ref(false);
 
 const remindAutoRenewal = ref(false);
 
+const supportsAutoRenewal = ref(false);
+
 const subscriptionUrl = ref('');
 
 
@@ -991,6 +1012,8 @@ const activeSessions = ref([]);
 const loadingSessions = ref(false);
 
 const sessionError = ref('');
+
+const removingSessionId = ref(null);
 
 
 
@@ -1084,7 +1107,9 @@ const fetchUserInfo = async (showLoading = true) => {
 
       remindTraffic.value = !!response.data.remind_traffic;
 
-      remindAutoRenewal.value = !!response.data.auto_renewal;
+      supportsAutoRenewal.value = Object.prototype.hasOwnProperty.call(response.data, 'auto_renewal');
+
+      remindAutoRenewal.value = supportsAutoRenewal.value && !!response.data.auto_renewal;
 
 
 
@@ -1348,11 +1373,15 @@ const updateRemindSettings = async (type) => {
 
       remind_expire: remindExpire.value ? 1 : 0,
 
-      remind_traffic: remindTraffic.value ? 1 : 0,
-
-      auto_renewal: remindAutoRenewal.value ? 1 : 0
+      remind_traffic: remindTraffic.value ? 1 : 0
 
     };
+
+    if (supportsAutoRenewal.value) {
+
+      data.auto_renewal = remindAutoRenewal.value ? 1 : 0;
+
+    }
 
 
 
@@ -1376,7 +1405,7 @@ const updateRemindSettings = async (type) => {
 
     remindTraffic.value = !!userInfo.value.remind_traffic;
 
-    remindAutoRenewal.value = !!userInfo.value.auto_renewal;
+    remindAutoRenewal.value = supportsAutoRenewal.value && !!userInfo.value.auto_renewal;
 
 
 
@@ -1585,6 +1614,45 @@ const redeemGiftCard = async () => {
 
 
 
+const getSessionUserAgent = (session) => session?.ua || session?.user_agent || '';
+
+const getSessionIp = (session) => session?.ip || session?.ip_address || '';
+
+const getSessionTimestamp = (session) =>
+  session?.login_at || session?.last_used_at || session?.created_at || '';
+
+const toTimestampMilliseconds = (timestamp) => {
+
+  if (timestamp === null || timestamp === undefined || timestamp === '') return null;
+
+  const numericTimestamp = Number(timestamp);
+
+  if (Number.isFinite(numericTimestamp)) {
+
+    if (numericTimestamp < 0) return null;
+
+    return numericTimestamp < 1000000000000
+      ? numericTimestamp * 1000
+      : numericTimestamp;
+
+  }
+
+  const parsedTimestamp = Date.parse(timestamp);
+
+  return Number.isNaN(parsedTimestamp) ? null : parsedTimestamp;
+
+};
+
+const formatSessionName = (session) => {
+
+  const userAgent = getSessionUserAgent(session);
+
+  return userAgent ? formatDeviceInfo(userAgent) : t('profile.loginSession');
+
+};
+
+
+
 const fetchActiveSessions = async () => {
 
   loadingSessions.value = true;
@@ -1609,9 +1677,10 @@ const fetchActiveSessions = async () => {
 
       const sortedSessions = sessions.sort((a, b) => {
 
-        if (!a.login_at || !b.login_at) return 0;
+        const aTimestamp = toTimestampMilliseconds(getSessionTimestamp(a)) || 0;
+        const bTimestamp = toTimestampMilliseconds(getSessionTimestamp(b)) || 0;
 
-        return b.login_at - a.login_at;
+        return bTimestamp - aTimestamp;
 
       });
 
@@ -1640,6 +1709,42 @@ const fetchActiveSessions = async () => {
       loading.value = false;
 
     }
+
+  }
+
+};
+
+
+
+const removeSession = async (session) => {
+
+  if (!window.confirm(t('profile.removeSessionConfirm'))) return;
+
+  removingSessionId.value = session.id;
+
+  try {
+
+    const response = await apiRemoveActiveSession(session.id);
+
+    if (!response || response.data === false) {
+
+      throw new Error(t('profile.removeSessionError'));
+
+    }
+
+    activeSessions.value = activeSessions.value.filter(item => item.id !== session.id);
+
+    success(t('profile.removeSessionSuccess'));
+
+  } catch (err) {
+
+    console.error('Failed to remove active session:', err);
+
+    showError(err?.response?.message || err?.message || t('profile.removeSessionError'));
+
+  } finally {
+
+    removingSessionId.value = null;
 
   }
 
@@ -1773,28 +1878,15 @@ const formatDeviceInfo = (ua) => {
 
 const formatTimestamp = (timestamp) => {
 
-  if (!timestamp) return '';
+  const timestampMilliseconds = toTimestampMilliseconds(timestamp);
 
-
-
-  const numTimestamp = Number(timestamp);
-
-  if (isNaN(numTimestamp)) return '';
-
-
-
-  if (numTimestamp < 0 || numTimestamp > 4102444800) {
-    console.error('Invalid timestamp:', timestamp);
-
-    return '';
-
-  }
+  if (timestampMilliseconds === null) return '';
 
 
 
   try {
 
-    const date = new Date(numTimestamp * 1000);
+    const date = new Date(timestampMilliseconds);
 
 
 
@@ -3481,10 +3573,11 @@ body.dark-theme {
 
           align-items: center;
 
+        }
 
+        .device-ip + .device-time {
 
           &:before {
-
             content: '•';
 
             margin-right: 8px;
@@ -3492,6 +3585,58 @@ body.dark-theme {
           }
 
         }
+
+      }
+
+    }
+
+    .remove-session-btn {
+
+      width: 36px;
+
+      height: 36px;
+
+      margin-left: 12px;
+
+      border: 0;
+
+      border-radius: 8px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: var(--text-muted);
+
+      background: transparent;
+
+      cursor: pointer;
+
+      transition: color 0.2s ease, background-color 0.2s ease;
+
+      &:hover:not(:disabled) {
+
+        color: #dc3545;
+
+        background-color: rgba(220, 53, 69, 0.1);
+
+      }
+
+      &:disabled {
+
+        cursor: wait;
+
+        opacity: 0.6;
+
+      }
+
+      .loader {
+
+        width: 16px;
+
+        height: 16px;
 
       }
 

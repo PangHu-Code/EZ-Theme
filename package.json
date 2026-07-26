@@ -20,7 +20,7 @@
     "@vueuse/core": "^13.0.0",
     "@vueuse/motion": "^3.0.3",
     "aieditor": "^1.4.1",
-    "axios": "^0.27.2",
+    "axios": "^1.18.1",
     "chart.js": "^3.9.1",
     "core-js": "^3.25.0",
     "crisp": "^1.0.0",

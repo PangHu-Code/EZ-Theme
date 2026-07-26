@@ -1,6 +1,6 @@
-# 🚀 V2Board 用户前端项目
+# 🚀 V2Board / Xboard 用户前端项目
 
-一个美观、现代的 **V2Board 管理后台前端项目**，基于 **Vue 3** 开发。
+一个美观、现代的 **V2Board / Xboard 用户前端项目**，基于 **Vue 3** 开发。
 
 ---
 
@@ -52,6 +52,25 @@ src/
 ## ⚙️ 自定义配置
 
 可在 `src/config/index.js` 文件中修改主题颜色、API 基础 URL 及其他配置。
+
+### Xboard 配置
+
+使用 Xboard 时，请将面板类型设为 `Xboard`，并确保 API 地址以 `/api/v1` 结尾：
+
+```js
+PANEL_TYPE: 'Xboard',
+API_CONFIG: {
+  urlMode: 'auto',
+  autoConfig: {
+    useSameProtocol: true,
+    appendApiPath: true,
+    apiPath: '/api/v1'
+  }
+}
+```
+
+新版 Xboard 支持礼品卡兑换。如需显示入口，可同时设置
+`PROFILE_CONFIG.showGiftCardRedeem` 为 `true`。
 
 ---
 ## 🛠️ 开始使用

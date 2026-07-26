@@ -30,7 +30,7 @@
           </div>
 
           <!-- 自动续费设置 -->
-          <div class="balance-setting">
+          <div v-if="supportsAutoRenewal" class="balance-setting">
             <div class="setting-item">
               <div class="setting-info">
                 <span class="setting-label">{{ $t('profile.autoRenewal') }}</span>
@@ -164,6 +164,7 @@ const customAmount = ref('');
 const amountError = ref('');
 const minimumDepositAmount = WALLET_CONFIG.minimumDepositAmount || 1;
 const autoRenewal = ref(false);
+const supportsAutoRenewal = ref(false);
 const updatingAutoRenewal = ref(false);
 const loading = reactive({
   balance: true,
@@ -227,7 +228,8 @@ const fetchUserBalance = async () => {
     const response = await getUserInfo();
     if (response && response.data) {
       userBalance.value = response.data.balance || 0;
-      autoRenewal.value = !!response.data.auto_renewal;
+      supportsAutoRenewal.value = Object.prototype.hasOwnProperty.call(response.data, 'auto_renewal');
+      autoRenewal.value = supportsAutoRenewal.value && !!response.data.auto_renewal;
     }
   } catch (error) {
     console.error('获取用户余额失败:', error);
@@ -241,6 +243,8 @@ const fetchUserBalance = async () => {
  * 更新自动续费设置
  */
 const updateAutoRenewal = async () => {
+  if (!supportsAutoRenewal.value) return;
+
   updatingAutoRenewal.value = true;
   
   try {
@@ -915,4 +919,4 @@ onMounted(() => {
     will-change: transform;
   }
 }
-</style> 
+</style>
