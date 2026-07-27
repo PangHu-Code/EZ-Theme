@@ -450,6 +450,11 @@ export default {
         unknownIP: 'IP không xác định',
         unknownBrowser: 'Trình duyệt không xác định',
         sessionError: 'Lấy lịch sử đăng nhập thất bại',
+        loginSession: 'Phiên đăng nhập',
+        removeSession: 'Xóa phiên',
+        removeSessionConfirm: 'Xóa phiên đăng nhập này? Thiết bị liên quan sẽ cần đăng nhập lại.',
+        removeSessionSuccess: 'Đã xóa phiên đăng nhập',
+        removeSessionError: 'Không thể xóa phiên đăng nhập',
         telegramGroup: 'Nhóm Telegram',
         telegramBot: 'Bot Telegram',
         bindTelegram: 'Liên kết Bot Telegram',
@@ -925,6 +930,11 @@ export default {
         giftCardError: 'Sử dụng thẻ quà tặng thất bại',
         recentDevices: 'Thiết bị đã đăng nhập gần đây',
         unknownIP: 'IP không xác định',
-        sessionError: 'Lấy thông tin phiên đăng nhập thất bại'
+        sessionError: 'Lấy thông tin phiên đăng nhập thất bại',
+        loginSession: 'Phiên đăng nhập',
+        removeSession: 'Xóa phiên',
+        removeSessionConfirm: 'Xóa phiên đăng nhập này? Thiết bị liên quan sẽ cần đăng nhập lại.',
+        removeSessionSuccess: 'Đã xóa phiên đăng nhập',
+        removeSessionError: 'Không thể xóa phiên đăng nhập'
     }
 };

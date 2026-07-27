@@ -279,7 +279,8 @@ export const PAYMENT_CONFIG = mergeDeep(DEFAULT_PAYMENT_CONFIG, getConfig('PAYME
  * 控制用户中心页面的功能显示
  */
 const DEFAULT_PROFILE_CONFIG = {
-    // 是否显示礼品卡兑换栏目 (true=显示, false=隐藏) TODO
+    // 是否显示礼品卡兑换栏目 (true=显示, false=隐藏)
+    // 支持 Xiao-V2board 与新版 Xboard
     showGiftCardRedeem: false,
 
     // 是否显示最近登录设备栏目 (true=显示, false=隐藏)
